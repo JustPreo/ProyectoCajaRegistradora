@@ -12,12 +12,21 @@ import java.util.InputMismatchException; //Import MismatchException
 public class CajaRegistradora {
     public static void main(String[]args)
     {
+        //VARIABLES
         Scanner input = new Scanner(System.in);
-        boolean Seguir = true;
-        int Opcion = 0;
+        input.useDelimiter("\n");
+        boolean Seguir = true; //Para seguir con el menu
+        boolean primeravez = true; //Para ver si es la primera vez que abre caja
+        int Opcion = 0; //Crear la vaiable opcion
+        double CajaEfectivoT = 0;//El efectivo de la caja como tal , asi se calcula todo lo que hay
+        double CajaEfectivoV = 0;//Efectivo de ventas , se usara para medir el total de dinero ese dia
+        double CajaEfectivoI = 0;//Efectivo ingresado
+        boolean valido = false;//Numero valido en try
+        boolean CajaEstado = false; //Estado de la caja
+        //-------------------------------------
         //Menu Inicial
         while (Seguir == true){
-        System.out.println("***MENU***"+
+        System.out.println("---MENU---"+
                 "\n1.Abrir Caja"+
                 "\n2.Ventas"+
                 "\n3.Compras"+
@@ -37,7 +46,40 @@ public class CajaRegistradora {
         switch(Opcion)
         {
             case 1:
-                System.out.println("Abrir Caja");
+                if (primeravez == true)
+                {
+                while (!valido)
+                {
+                try 
+                {
+                System.out.println("Ingresar la cantidad de efectivo a agregar a la caja");
+                CajaEfectivoI = input.nextDouble();
+                
+                if (CajaEfectivoI >= 0){//Prueba si es un numero positivo
+                CajaEfectivoT += CajaEfectivoI;
+                valido = true;
+                primeravez = false;
+                System.out.println("Se a ingresado:Lps."+CajaEfectivoI);
+                }
+                else //Si es negativo entonces
+                {
+                System.out.println("Error:No se permiten cantidades negativas");//Mensaje de error Nums negativos
+                //input.next();
+                }
+                
+                }//Try
+                catch(InputMismatchException e)
+                {
+                System.out.println("Porfavor ingresar un numero valido");
+                input.next();
+                valido = false;
+                
+                }//Mismatch
+                    
+                }//!Valido
+                }//PrimeraVez
+                CajaEstado = true;
+                System.out.println("La Caja esta abierta");
                 break;
             case 2:
                 System.out.println("Ventas");
