@@ -15,7 +15,7 @@ public class CajaRegistradora {
         //VARIABLES
         Scanner input = new Scanner(System.in);
         input.useDelimiter("\n");
-        boolean Seguir = true; //Para seguir con el menu
+        boolean SseguirMenu = true; //Para seguir con el menu
         boolean primeravez = true; //Para ver si es la primera vez que abre caja
         int Opcion = 0; //Crear la vaiable opcion
         double CajaEfectivoT = 0;//El efectivo de la caja como tal , asi se calcula todo lo que hay
@@ -25,7 +25,7 @@ public class CajaRegistradora {
         boolean CajaEstado = false; //Estado de la caja
         //-------------------------------------
         //Menu Inicial
-        while (Seguir == true){
+        while (seguirMenu == true){
         System.out.println("---MENU---"+
                 "\n1.Abrir Caja"+
                 "\n2.Ventas"+
@@ -36,11 +36,11 @@ public class CajaRegistradora {
         try { //Misma logica que el try de python
         Opcion = input.nextInt();
         }
-        catch (InputMismatchException e) //Esto es necesario es como el try ; except de python
+        catch (InputMismatchException e) //Cuando haya un error va a hacer el bloque de codigo de abajo
         {
-        System.out.println("Error: Debe de ingresar un numero entero");
+        System.out.println("Error: Debe de ingresar un numero valido");
         input.next();
-        continue; //Volver al bucle y que no se repita eso de ingrese uno correcto
+        continue; //Volver al bucle del y que no se repita eso de ingrese uno correcto
         
         }
         switch(Opcion)
