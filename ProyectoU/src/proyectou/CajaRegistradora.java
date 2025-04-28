@@ -47,6 +47,7 @@ public class CajaRegistradora {
         {
             case 1:
                 if (primeravez == true)
+                    valido = false;
                 {
                 while (!valido)
                 {
@@ -59,7 +60,9 @@ public class CajaRegistradora {
                 CajaEfectivoT += CajaEfectivoI;
                 valido = true;
                 primeravez = false;
-                System.out.println("Se a ingresado:Lps."+CajaEfectivoI);
+                System.out.printf("\nSe a ingresado:Lps.%.2fn",CajaEfectivoI);
+                System.out.printf("\nEfectivo Total en caja:Lps.%.2fn",CajaEfectivoT);
+                //Cuando se usa el printf con el %.2fn se tiene que poner , y no +
                 }
                 else //Si es negativo entonces
                 {
@@ -79,7 +82,7 @@ public class CajaRegistradora {
                 }//!Valido
                 }//PrimeraVez
                 CajaEstado = true;
-                System.out.println("La Caja esta abierta");
+                System.out.println("\nLa Caja esta abierta");
                 break;
             case 2:
                 System.out.println("Ventas");
