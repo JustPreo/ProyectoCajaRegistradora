@@ -25,10 +25,10 @@ public class Cerrato_Aaron_TiendaJava {
         double cajaEfectivoI = 0;//Efectivo ingresado
         boolean valido = false;//Numero valido en try
         boolean cajaEstado = false; //Estado de la caja
-        double stockProducto1 = 4;
-        double stockProducto2 = 3;
-        double stockProducto3 = 2;
-        double stockProducto4 = 50.2;
+        double stockProducto1 = 0;
+        double stockProducto2 = 0;
+        double stockProducto3 = 0;
+        double stockProducto4 = 0;
         String clienteIngresado = "";
         int productoElegidoCliente = 0;
         double cantidadElegidaCliente =0;
@@ -243,6 +243,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto1 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto1);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 1" + 
@@ -275,6 +276,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto2 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto2);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 2" + 
@@ -306,6 +308,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto3 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto3);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 3" + 
@@ -338,6 +341,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto4 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto4);                                        
                                         facturacion = facturacion + 
                                                 "\nCodigo: 4" + 
@@ -421,6 +425,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto1 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto1);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 1" + 
@@ -453,6 +458,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto2 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto2);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 2" + 
@@ -484,6 +490,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto3 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto3);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 3" + 
@@ -567,6 +574,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 cantidadElegidaCliente = input.nextDouble();
                                     if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
                                     {
+                                        stockProducto4 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto4);                                        
                                         facturacion = facturacion + 
                                                 "\nCodigo: 4" + 
@@ -630,18 +638,18 @@ public class Cerrato_Aaron_TiendaJava {
                         //-----------------FACTURACION DESPUES DE TODO-------------------------
                         impuesto = 0.07 * subTotal;
                         total = (subTotal - descuento)+impuesto;
-                        facturacion = facturacion + "\n------"+ 
+                        facturacion = facturacion + "\n-------------------"+ 
                                 "\nsubTotal:Lps."+String.format("%.2f", subTotal)+
                                 "\nImpuesto:Lps."+String.format("%.2f",impuesto)+
                                 "\nDescuento:Lps."+String.format("%.2f",descuento)+
-                                "\nPorcentaje de descuento:%"+cantidadDesc+
+                                "\nPorcentaje de descuento:"+cantidadDesc+"%"+
                                 "\nTotal:Lps."+String.format("%.2f",total);
                         
                         System.out.println(facturacion);
                         cajaEfectivoV+=total;
                         cajaEfectivoT+=total;
                     }//Caja estado true
-                        
+                            
                         
                         
                     else 
@@ -653,7 +661,87 @@ public class Cerrato_Aaron_TiendaJava {
                 
                 
             case 3://Compras
-                System.out.println("Compras");
+                if (cajaEstado == true)
+                {
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| Codigo | Producto | Precio Compra | Proveedor |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 1      | Azucar   |Lps.25         | A         |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 2      | Avena    |Lps.20         | B         |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 2      | Avena    |Lps.22         | C         |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 3      | Trigo    | Lps.30        | B         |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 4      | Maiz     | Lps.18        | A         |");
+                        
+                        String tipoProveedor = "";
+                        int productoElegidoUsuario =0;
+                        boolean productoPermitido = false;
+                        
+                        valido = false;
+                        
+
+                        //--------------------------------------------------------------------
+                        //Intentar optimizar el codigo de arriba , despues solo un copypaste
+                        while (valido ==false){
+                            System.out.println("Ingrese el tipo de proveedor (A,B,C):");
+                            tipoProveedor = input.next();
+                            switch (tipoProveedor.toUpperCase())
+                                {
+                                    case "A":
+                                        productoPermitido = (productoElegidoUsuario == 1 || productoElegidoUsuario == 4);
+                                        valido = true;
+                                        /*
+                                        *La manera en la que esto funciona es que si declaro esas condiciones (Lo de arribas)
+                                        y no se cumplen cuando lo compare con lo que voy a pedir de productoElegidoUsuario 
+                                        entonces me va a retornar un false y lo seguire validando con eso
+                                        */
+                                        break;
+                                    case "B":
+                                        productoPermitido = (productoElegidoUsuario == 2 || productoElegidoUsuario ==3);
+                                        valido = true;
+                                        break;
+                                    case "C":
+                                        productoPermitido = (productoElegidoUsuario ==2);
+                                        valido = true;
+                                        break;
+                                    default:
+                                        System.out.println("Proveedor no valido");
+                                }
+                        }//Valido producto elegido usuario
+                        valido = false;
+                        
+                        while (valido==false){
+                            try{
+                            System.out.println("Escriba el codigo del producto que comprara:");
+                            productoElegidoUsuario = input.nextInt();
+                            if (productoElegidoUsuario>=1 && productoElegidoUsuario <=4)
+                                {
+                                 valido = true;
+                                }
+                            
+                            else
+                                {
+                                    System.out.println("Ingrese un codigo valido");
+                                    
+                                }
+                            }
+                            
+                            catch (InputMismatchException e)
+                            {
+                                System.out.println("Ingrese un numero valido");
+                                input.next();
+                            }
+                        }//fin valido false para producto elegido usuario
+                        
+                        }//Fin caja estado
+                        switch (productoElegidoUsuario)
+                        {
+                        
+                        }
+                
                 break;
             case 4://Facturacion
                 System.out.println("Facturacion");
