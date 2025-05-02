@@ -684,15 +684,35 @@ public class Cerrato_Aaron_TiendaJava {
                         
 
                         //--------------------------------------------------------------------
-                        //Intentar optimizar el codigo de arriba , despues solo un copypaste
+                        //Intentare optimizar el codigo de arriba , despues solo es usarlo como guia
+                        //TIPO DE PROVEEDOR
                         while (valido ==false){
                             System.out.println("Ingrese el tipo de proveedor (A,B,C):");
                             tipoProveedor = input.next();
+                            if (!tipoProveedor.equalsIgnoreCase("A") && !tipoProveedor.equalsIgnoreCase("B")&& 
+                                !tipoProveedor.equalsIgnoreCase("C") )
+                            {
+                            System.out.println("Ingrese un cliente valido");
+                            }
+                            else 
+                            {
+                            valido = true;
+                            }
+                        }
+                        //----------------------------------------------------------------------------
+                        valido = false;
+                        boolean numeroValido = false;
+                        
+                        while (numeroValido==false){
+                            try{
+                            while (numeroValido == false){
+                                System.out.println("Escriba el codigo del producto que comprara:");
+                            productoElegidoUsuario = input.nextInt();
                             switch (tipoProveedor.toUpperCase())
                                 {
                                     case "A":
                                         productoPermitido = (productoElegidoUsuario == 1 || productoElegidoUsuario == 4);
-                                        valido = true;
+                                        numeroValido = true;
                                         /*
                                         *La manera en la que esto funciona es que si declaro esas condiciones (Lo de arribas)
                                         y no se cumplen cuando lo compare con lo que voy a pedir de productoElegidoUsuario 
@@ -701,32 +721,113 @@ public class Cerrato_Aaron_TiendaJava {
                                         break;
                                     case "B":
                                         productoPermitido = (productoElegidoUsuario == 2 || productoElegidoUsuario ==3);
-                                        valido = true;
+                                        numeroValido = true;
                                         break;
                                     case "C":
                                         productoPermitido = (productoElegidoUsuario ==2);
-                                        valido = true;
+                                        numeroValido = true;
                                         break;
                                     default:
                                         System.out.println("Proveedor no valido");
-                                }
-                        }//Valido producto elegido usuario
-                        valido = false;
-                        
-                        while (valido==false){
-                            try{
-                            System.out.println("Escriba el codigo del producto que comprara:");
-                            productoElegidoUsuario = input.nextInt();
-                            if (productoElegidoUsuario>=1 && productoElegidoUsuario <=4)
+                                    }
+                            }
+
+                                if (!productoPermitido)
                                 {
-                                 valido = true;
-                                }
-                            
-                            else
-                                {
-                                    System.out.println("Ingrese un codigo valido");
+                                    System.out.println("Este proveedor no vende ese producto");
                                     
+
                                 }
+                                else if (productoPermitido)
+                                {
+                                    double cantidadKG = 0;
+                                    
+                                    while (true)
+                                    {
+                                        try
+                                        {
+                                            System.out.println("Ingrese la cantidad a comprar(KG)");
+                                            cantidadKG = input.nextDouble();
+                                            if (cantidadKG < 0)
+                                            {
+                                                System.out.println("No puedes usar numeros negativos");
+                                            }
+                                            else if (cantidadKG >= 0)
+                                            {
+                                                double costoUnitario =0;
+                                                double costoTotal = 0;
+                                                switch(tipoProveedor.toUpperCase())
+                                                {
+                                                    case "A":
+                                                        if (productoElegidoUsuario==1)
+                                                        {
+                                                            costoUnitario = 25;
+                                                        }
+                                                        else if(productoElegidoUsuario==4)
+                                                        {
+                                                            costoUnitario =18;
+                                                        }
+                                                        break;
+                                                    case "B":
+                                                        if (productoElegidoUsuario==2)
+                                                        {
+                                                            costoUnitario = 20;
+                                                        }
+                                                        else if(productoElegidoUsuario==3)
+                                                        {
+                                                            costoUnitario =30;
+                                                        }
+                                                        break;
+                                                    case "C":
+                                                        if (productoElegidoUsuario==2)
+                                                        {
+                                                            costoUnitario = 22;
+                                                        }
+                                                        break;
+                                                            
+                                                }
+                                              costoTotal = costoUnitario * cantidadKG;
+                                              
+                                              if (costoTotal <= cajaEfectivoT)
+                                              {
+                                                  cajaEfectivoT -= costoTotal;
+                                                  if (productoElegidoUsuario==1) 
+                                                  {
+                                                      stockProducto1 += cantidadKG;
+                                                  }
+                                                  else if (productoElegidoUsuario==2)
+                                                  {
+                                                      stockProducto2 += cantidadKG;
+                                                  }
+                                                  else if (productoElegidoUsuario==3)
+                                                  {
+                                                      stockProducto3 += cantidadKG;
+                                                  }
+                                                  else if (productoElegidoUsuario==4)
+                                                  {
+                                                      stockProducto4 += cantidadKG;
+                                                  }
+                                                  
+                                              }//FinIfCostoTotal
+                                              else 
+                                              {
+                                                  System.out.println("Fondos Insuficientes");
+                                              }
+                                            
+                                            //Logica de facturacion)?
+                                            
+                                            
+                                            } 
+                                            
+                                        }
+                                        
+                                        catch(InputMismatchException e)
+                                        {
+                                            System.out.println("Ingrese una cantidad valida");
+                                        }
+                                    }
+                                }
+                                
                             }
                             
                             catch (InputMismatchException e)
@@ -734,13 +835,16 @@ public class Cerrato_Aaron_TiendaJava {
                                 System.out.println("Ingrese un numero valido");
                                 input.next();
                             }
-                        }//fin valido false para producto elegido usuario
-                        
-                        }//Fin caja estado
-                        switch (productoElegidoUsuario)
-                        {
-                        
-                        }
+                       
+                        }//fin valido false para producto elegido usuario 
+                            
+                            
+                            
+                                        
+      
+                }//Estado caja True
+
+ 
                 
                 break;
             case 4://Facturacion
