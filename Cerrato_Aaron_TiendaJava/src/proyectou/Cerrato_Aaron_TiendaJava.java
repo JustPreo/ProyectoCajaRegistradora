@@ -790,31 +790,52 @@ public class Cerrato_Aaron_TiendaJava {
                                               
                                               if (costoTotal <= cajaEfectivoT)
                                               {
+                                                  String nombreP = "";
                                                   cajaEfectivoT -= costoTotal;
                                                   if (productoElegidoUsuario==1) 
                                                   {
                                                       stockProducto1 += cantidadKG;
+                                                      nombreP = "Azucar";
                                                   }
                                                   else if (productoElegidoUsuario==2)
                                                   {
                                                       stockProducto2 += cantidadKG;
+                                                      nombreP = "Avena";
                                                   }
                                                   else if (productoElegidoUsuario==3)
                                                   {
                                                       stockProducto3 += cantidadKG;
+                                                      nombreP = "Trigo";
                                                   }
                                                   else if (productoElegidoUsuario==4)
                                                   {
                                                       stockProducto4 += cantidadKG;
+                                                      nombreP = "Maiz";
                                                   }
-                                                  
+                                              
+
+                                                //Logica de facturacion)?
+                                                String facturacion = "---Factura---";
+                                                
+                                                
+                                                facturacion = facturacion + 
+                                                "\nCodigo: " +productoElegidoUsuario+ 
+                                                "   Nombre Producto: "+ nombreP + 
+                                                "   Precio Unitario: "+ costoUnitario +
+                                                "   Cantidad: "+cantidadKG +" KG"+
+                                                "\nTotal:Lps "+String.format("%.2fn",costoTotal);
+                                                
+                                              
+                                              
+                                              
                                               }//FinIfCostoTotal
                                               else 
                                               {
                                                   System.out.println("Fondos Insuficientes");
+                                                  break;
                                               }
                                             
-                                            //Logica de facturacion)?
+                                            
                                             
                                             
                                             } 
