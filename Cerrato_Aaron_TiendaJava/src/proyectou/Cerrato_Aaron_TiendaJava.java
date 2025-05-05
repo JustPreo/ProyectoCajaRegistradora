@@ -184,9 +184,9 @@ public class Cerrato_Aaron_TiendaJava {
                         
                         System.out.println("-------------------------------------------------------------");                       
                         System.out.println("Tipo de clientes");
-                        System.out.println("A - Cliente tipo A: puede comprar cualquier producto (códigos 1, 2, 3 y 4).");
-                        System.out.println("B - Cliente tipo B: puede comprar solo productos con código 1, 2 y 3.");
-                        System.out.println("C - Cliente tipo C: puede comprar solo el producto con código 4.");
+                        System.out.println("A - Cliente tipo A: puede comprar cualquier producto (codigo 1, 2, 3 y 4).");
+                        System.out.println("B - Cliente tipo B: puede comprar solo productos con codigo 1, 2 y 3.");
+                        System.out.println("C - Cliente tipo C: puede comprar solo el producto con codigo 4.");
                         System.out.println("-------------------------------------------------------------");
 
                         
@@ -701,6 +701,7 @@ public class Cerrato_Aaron_TiendaJava {
                         }
                         //----------------------------------------------------------------------------
                         valido = false;
+                        String facturacion = "---Factura---";
                         boolean numeroValido = false;
                         
                         while (numeroValido==false){
@@ -815,7 +816,7 @@ public class Cerrato_Aaron_TiendaJava {
                                               
 
                                                 //Logica de facturacion)?
-                                                String facturacion = "---Factura---";
+                                                
                                                 
                                                 
                                                 facturacion = facturacion + 
@@ -823,8 +824,9 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "   Nombre Producto: "+ nombreP + 
                                                 "   Precio Unitario: "+ costoUnitario +
                                                 "   Cantidad: "+cantidadKG +" KG"+
-                                                "\nTotal:Lps "+String.format("%.2fn",costoTotal);
-                                                
+                                                "\nTotal:Lps "+String.format("%.2f",costoTotal);
+                                                System.out.println(facturacion);
+                                                break;
                                               
                                               
                                               
@@ -864,6 +866,11 @@ public class Cerrato_Aaron_TiendaJava {
                                         
       
                 }//Estado caja True
+                
+                else if (cajaEstado == false)
+                {
+                    System.out.println("La caja ocupa estar abierta para realizar esta accion");
+                }
 
  
                 
