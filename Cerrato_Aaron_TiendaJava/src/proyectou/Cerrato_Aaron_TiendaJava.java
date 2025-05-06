@@ -163,7 +163,8 @@ public class Cerrato_Aaron_TiendaJava {
                     }//Else del if primera vez
                 break;
             case 2://Ventas
-                                if (cajaEstado == true)
+                                if (cajaEstado == true && (stockProducto1 > 0 || stockProducto2 > 0||stockProducto3 > 0||stockProducto4 > 0))
+                                    //Revisar si la caja estado true  y minimo hay 1 de stock en un producto
                     {
                         boolean facturar = false;
                         String facturacion = "---Factura---";
@@ -423,10 +424,14 @@ public class Cerrato_Aaron_TiendaJava {
                         cajaEfectivoT+=total;
                     }//Facturar
                     }//Caja estado true
-                    else 
+                                else if(!cajaEstado)
                     {
                      System.out.println("La caja ocupa estar abierta para realizar esta accion");
                     }
+                                else if((stockProducto1 == 0 || stockProducto2 == 0||stockProducto3 == 0||stockProducto4 == 0))
+                                {
+                                    System.out.println("Ocupa tener stock para hacer una venta");
+                                }
 
                 break;
                 
