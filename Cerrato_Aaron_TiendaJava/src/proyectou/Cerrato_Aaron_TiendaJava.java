@@ -163,8 +163,9 @@ public class Cerrato_Aaron_TiendaJava {
                     }//Else del if primera vez
                 break;
             case 2://Ventas
-                if (cajaEstado == true)
+                                if (cajaEstado == true)
                     {
+                        boolean facturar = false;
                         String facturacion = "---Factura---";
                         double subTotal = 0;
                         double total = 0;
@@ -207,74 +208,103 @@ public class Cerrato_Aaron_TiendaJava {
                         }
                         
                         productoElegidoCliente =0;
-                        if (clienteIngresado.equalsIgnoreCase("A"))
+                        boolean productoPermitido = false;
+                        boolean seguir = true;
+                        boolean numeroValido = false;
+                        
+                        while (seguir)
                         {
+                            numeroValido = false;
+                            try 
+                            {
+                                while (!numeroValido)
+                                {
+                                System.out.println("Ingrese el codigo de producto a comprar (1-4)");
+                                productoElegidoCliente = input.nextInt();
+                                if (productoElegidoCliente < 1 || productoElegidoCliente > 4)
+                                {
+                                    System.out.println("Codigo Invalido");
+                                }
+                                else
+                                {
+                                numeroValido = true;
+                                }
+                                }
+                            }
+                            catch (InputMismatchException e)
+                            {
+                                System.out.println("Ingrese un digito valido");
+                                input.next();
+                            }
+                        switch (clienteIngresado.toLowerCase())
+                        {
+                            case "a":
+                                productoPermitido = (productoElegidoCliente == 1 ||productoElegidoCliente == 2 
+                                        ||productoElegidoCliente == 3 ||productoElegidoCliente == 4);
+                                
+                                break;
+                            case "b":
+                                productoPermitido = (productoElegidoCliente == 1 ||productoElegidoCliente == 2 
+                                        ||productoElegidoCliente == 3);
+                                
+                                
+                                break;
+                            case "c":
+                                productoPermitido = (productoElegidoCliente == 4);
+                                
+                                break;
+                            default:
+                                break;
+                        }
+                        if (!productoPermitido)
+                                {
+                                    System.out.println("Este cliente no puede comprar el producto seleccionado");
+                                    seguir = false;
+                                    continue;
+                                    
 
-                            siNo = "si"; //Para que se reinicie la seleccion de siNo
-                            while (siNo.equalsIgnoreCase("si")){   
-                            valido = false;
-                            System.out.println("Ingrese codigo del producto a comprar");
-                            while (!valido) {
-                              try {
-                                  productoElegidoCliente =0;//Resetear producto elegido por si elige que si
-                                  productoElegidoCliente = input.nextInt();
-
-                                  if (productoElegidoCliente >= 1 && productoElegidoCliente <= 4) {//Revisa que el cliente este dentro del 1-4
-                                      valido = true;
-                                  } else {
-                                      System.out.println("Código inválido. Debe ser un número del 1 al 4.");
-                                      valido = false;
-                                  }
-                              } catch (InputMismatchException e) {
-                                  System.out.println("Ingrese un número válido.");
-                                  input.next(); // limpia el scanner
-                              }
-                              
-
-                              
-                              if (productoElegidoCliente == 1) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1 ) //Comparar cada uno de los que pueda elegir)?
-                                    {
-                                        stockProducto1 -= cantidadElegidaCliente;
+                                }
+                        else if (productoPermitido)
+                        {
+                        cantidadElegidaCliente = 0;
+                        numeroValido = false;
+                        while (!numeroValido)
+                        {
+                        try 
+                        {
+                        System.out.println("Ingrese la cantidad a comprar(KG)");
+                        cantidadElegidaCliente = input.nextDouble();
+                        numeroValido = true;
+                        }
+                        catch (InputMismatchException e)
+                        {
+                            System.out.println("Ingrese un digito valido");
+                            input.next();
+                        }
+                        }//numero valido
+                        //Revisar si hay stock
+                        //---------------------------------------------------------------------
+                        //Inicio de procesos de subTotal
+                        switch (productoElegidoCliente)
+                        {
+                            case 1://En caso de elegir el producto 1
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1)
+                                {
+                                stockProducto1 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto1);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 1" + 
                                                 "   Nombre Producto: Azucar"+ 
                                                 "   Precio Unitario: "+precioProducto1+
                                                 "   Cantidad: "+cantidadElegidaCliente;
-                                        valido = true;
-                                    }
-                                    else 
+                                }
+                                else 
                                     {
                                         System.out.println("No hay stock suficiente de ese producto");
                                     }
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              } //Fin If A
-                              //INICIO IF 1
-                              //---------------------------------------------------------------------
-                              if (productoElegidoCliente == 2) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
+                                break;
+                            case 2://En caso de elegir el producto 2
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
                                     {
                                         stockProducto2 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto2);
@@ -283,30 +313,14 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "   Nombre Producto: Avena"+ 
                                                 "   Precio Unitario: "+precioProducto2+
                                                 "   Cantidad: "+cantidadElegidaCliente;
-                                        valido = true;
                                     }
                                     else 
                                     {
                                         System.out.println("No hay stock suficiente de ese producto");
                                     }
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              }//Fin if 2
-                              //---------------------------------------------------------------------
-                              if (productoElegidoCliente == 3) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
+                                break;
+                            case 3://En caso de elegr producto 3
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
                                     {
                                         stockProducto3 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto3);
@@ -316,30 +330,15 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "   Precio Unitario: "+precioProducto3+
                                                 "   Cantidad: "+cantidadElegidaCliente;
                                         
-                                        valido = true;
+                                        
                                     }
                                     else 
                                     {
                                         System.out.println("No hay stock suficiente de ese producto");
                                     }
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              }//Fin if 3
-                              //---------------------------------------------------------------------
-                              if (productoElegidoCliente == 4) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
+                                break;
+                            case 4://En caso de elegir producto 4
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
                                     {
                                         stockProducto4 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto4);                                        
@@ -349,278 +348,52 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "   Precio Unitario: "+precioProducto4+
                                                 "   Cantidad: "+cantidadElegidaCliente;
                                         
-                                        valido = true;
-                                    }
-                                    else 
-                                    {
-                                        System.out.println("No hay stock suficiente de ese producto");
-                                    }
-                                    
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              }//Fin if 2
-                              //---------------------------------------------------------------------
-                              
-                              /*
-                              else //Agregar un else if para que si elige x producto que no sea los permitidos entonces hacer eso  
-                              {
-                              System.out.println("No puede comprar dicho producto");
-                              }
-                              */
-                            }//FinValido
-                    siNoValido = false;
-                            while (!siNoValido){
-                                System.out.println("Desea seguir comprando productos?Si/No");
-                                siNo = input.next();
-
-                            if (siNo.equalsIgnoreCase("si") ||siNo.equalsIgnoreCase("no") )
-                            {
-                            siNoValido = true;
-                            }
-                            else {System.out.println("Ingresa Si/No");
-                            siNoValido = false;}
-                            
-                            }
-                        }//Fin SiNo
-                        }//Fin del if cliente A
-                            
-                            
-                        
-                        else if(clienteIngresado.equalsIgnoreCase("B"))
-                        {
-                        siNo = "si"; //Para que se reinicie la seleccion de siNo
-                            while (siNo.equalsIgnoreCase("si")){   
-                            valido = false;
-                            System.out.println("Ingrese codigo del producto a comprar");
-                            while (!valido) {
-                              try {
-                                  productoElegidoCliente =0;//Resetear producto elegido por si elige que si
-                                  productoElegidoCliente = input.nextInt();
-
-                                  if (productoElegidoCliente >= 1 && productoElegidoCliente <= 4) {//Revisa que el cliente este dentro del 1-4
-                                      valido = true;
-                                  } else {
-                                      System.out.println("Código inválido. Debe ser un número del 1 al 4.");
-                                      valido = false;
-                                  }
-                              } catch (InputMismatchException e) {
-                                  System.out.println("Ingrese un número válido.");
-                                  input.next(); // limpia el scanner
-                              }
-                              
-
-                              
-                              if (productoElegidoCliente == 1) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1 ) //Comparar cada uno de los que pueda elegir)?
-                                    {
-                                        stockProducto1 -= cantidadElegidaCliente;
-                                        subTotal += (cantidadElegidaCliente * precioProducto1);
-                                        facturacion = facturacion + 
-                                                "\nCodigo: 1" + 
-                                                "   Nombre Producto: Azucar"+ 
-                                                "   Precio Unitario: "+precioProducto1+
-                                                "   Cantidad: "+cantidadElegidaCliente;
-                                        valido = true;
-                                    }
-                                    else 
-                                    {
-                                        System.out.println("No hay stock suficiente de ese producto");
-                                    }
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              } //Fin If A
-                              //INICIO IF 1
-                              //---------------------------------------------------------------------
-                              if (productoElegidoCliente == 2) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
-                                    {
-                                        stockProducto2 -= cantidadElegidaCliente;
-                                        subTotal += (cantidadElegidaCliente * precioProducto2);
-                                        facturacion = facturacion + 
-                                                "\nCodigo: 2" + 
-                                                "   Nombre Producto: Avena"+ 
-                                                "   Precio Unitario: "+precioProducto2+
-                                                "   Cantidad: "+cantidadElegidaCliente;
-                                        valido = true;
-                                    }
-                                    else 
-                                    {
-                                        System.out.println("No hay stock suficiente de ese producto");
-                                    }
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              }//Fin if 2
-                              //---------------------------------------------------------------------
-                              if (productoElegidoCliente == 3) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
-                                    {
-                                        stockProducto3 -= cantidadElegidaCliente;
-                                        subTotal += (cantidadElegidaCliente * precioProducto3);
-                                        facturacion = facturacion + 
-                                                "\nCodigo: 3" + 
-                                                "   Nombre Producto: Trigo"+ 
-                                                "   Precio Unitario: "+precioProducto3+
-                                                "   Cantidad: "+cantidadElegidaCliente;
                                         
-                                        valido = true;
                                     }
                                     else 
                                     {
                                         System.out.println("No hay stock suficiente de ese producto");
                                     }
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              }//Fin if 3
-                              //---------------------------------------------------------------------
-                              
-                              
-                              
-                              else if (productoElegidoCliente == 4)//Agregar un else if para que si elige x producto que no sea los permitidos entonces hacer eso  
-                              {
-                              System.out.println("No puede comprar dicho producto");
-                              }
-                              
-                            }//FinValido
-                    siNoValido = false;
-                            while (!siNoValido){
-                                System.out.println("Desea seguir comprando productos?Si/No");
-                                siNo = input.next();
-
-                            if (siNo.equalsIgnoreCase("si") ||siNo.equalsIgnoreCase("no") )
+                                break;
+                            default:
+                                break;
+                        
+                        
+                        }                        
+                        }//producto permmitido
+                            //---------------------------------------------------------------------
+                            //Revisar si el cliente quiere continuar comprando productos
+                            siNoValido = false;
+                            while (!siNoValido)
                             {
-                            siNoValido = true;
-                            }
-                            else {System.out.println("Ingresa Si/No");
-                            siNoValido = false;}
+                            System.out.println("Desea continuar comprando productos? Si/No");
+                                siNo = input.next();
                             
-                            }
-                        }
-                        }//Fin cliente B
-                        
-                        
-                        
-                        else if(clienteIngresado.equalsIgnoreCase("C"))
-                        {
-                        siNo = "si"; //Para que se reinicie la seleccion de siNo
-                            while (siNo.equalsIgnoreCase("si")){   
-                            valido = false;
-                            System.out.println("Ingrese codigo del producto a comprar");
-                            while (!valido) {
-                              try {
-                                  productoElegidoCliente =0;//Resetear producto elegido por si elige que si
-                                  productoElegidoCliente = input.nextInt();
-
-                                  if (productoElegidoCliente >= 1 && productoElegidoCliente <= 4) {//Revisa que el cliente este dentro del 1-4
-                                      valido = true;
-                                  } else {
-                                      System.out.println("Código inválido. Debe ser un número del 1 al 4.");
-                                      valido = false;
-                                  }
-                              } catch (InputMismatchException e) {
-                                  System.out.println("Ingrese un número válido.");
-                                  input.next(); // limpia el scanner
-                              }
-                              
-
-                              
-                              if (productoElegidoCliente == 4) 
-                                //Para que tengan la misma logica todos lo hice individual
-                              {
-                              //Pedir cantidad en KG y restar eso de stock SOLO SI HAY STOCK SUFICIENTE
-                              valido = false;
-                              while (!valido) {
-                              System.out.println("Ingresar cantidad de producto a comprar(KG)");
-                                try {
-                                cantidadElegidaCliente = input.nextDouble();
-                                    if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
-                                    {
-                                        stockProducto4 -= cantidadElegidaCliente;
-                                        subTotal += (cantidadElegidaCliente * precioProducto4);                                        
-                                        facturacion = facturacion + 
-                                                "\nCodigo: 4" + 
-                                                "   Nombre Producto: Maiz"+ 
-                                                "   Precio Unitario: "+precioProducto4+
-                                                "   Cantidad: "+cantidadElegidaCliente;
-                                        
-                                        valido = true;
-                                    }
-                                    else 
-                                    {
-                                        System.out.println("No hay stock suficiente de ese producto");
-                                    }
+                            switch (siNo.toLowerCase())
+                            {
+                                case "si":
+                                    siNoValido = true;
+                                    break;
+                                case "no":
+                                    siNoValido = true;
+                                    seguir = false;
+                                    facturar = true;
                                     
-                                }
-                                catch (InputMismatchException e) 
-                                {
-                                    System.out.println("Ingrese un numero valido");
-                                }
-                              } //Fin while valido
-                              }//Fin if 4
-
-                              
-                              
-                              
-                              else if (productoElegidoCliente == 1 || productoElegidoCliente ==2 || productoElegidoCliente ==3)//Agregar un else if para que si elige x producto que no sea los permitidos entonces hacer eso  
-                              {
-                              System.out.println("No puede comprar dicho producto");
-                              }
-                              
-                            }//FinValido
-                    siNoValido = false;
-                            while (!siNoValido){
-                                System.out.println("Desea seguir comprando productos?Si/No");
-                                siNo = input.next();
-
-                            if (siNo.equalsIgnoreCase("si") ||siNo.equalsIgnoreCase("no") )
-                            {
-                            siNoValido = true;
-                            }
-                            else {System.out.println("Ingresa Si/No");
-                            siNoValido = false;}
+                                    break;
+                                default:
+                                    siNoValido = false;
+                                    System.out.println("Ingrese Si/No");
+                                    break;
                             
                             }
-                        }
-                        }//Fin C
+                            }//siNoValido
+                        
+                        }//Seguir
+                    //---------------------------------------------------------------------------
+                       
+                    if (facturar)
+                    {
+                        //Calcular subtotal
                         int cantidadDesc = 0;
                         if (subTotal >=1000 &&  subTotal<=5000)  {
                             descuento = subTotal * 0.05;
@@ -648,10 +421,8 @@ public class Cerrato_Aaron_TiendaJava {
                         System.out.println(facturacion);
                         cajaEfectivoV+=total;
                         cajaEfectivoT+=total;
+                    }//Facturar
                     }//Caja estado true
-                            
-                        
-                        
                     else 
                     {
                      System.out.println("La caja ocupa estar abierta para realizar esta accion");
