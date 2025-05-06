@@ -1,0 +1,438 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package proyectou;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author user
+ */
+public class ProbarCosas {
+    public static void main (String[]args)
+    {
+     //VARIABLES
+        Scanner input = new Scanner(System.in);
+        input.useDelimiter("\n");
+        String siNo = "";
+        boolean siNoValido = false;//Para las opciones de elegir si o no
+        boolean seguirMenu = true; //Para seguir con el menu
+        boolean primeraVez = true; //Para ver si es la primera vez que abre caja
+        int Opcion = 0; //Crear la vaiable opcion
+        double cajaEfectivoT = 0;//El efectivo de la caja como tal , asi se calcula todo lo que hay
+        double cajaEfectivoV = 0;//Efectivo de ventas , se usara para medir el total de dinero ese dia
+        double cajaEfectivoI = 0;//Efectivo ingresado
+        boolean valido = false;//Numero valido en try
+        boolean cajaEstado = false; //Estado de la caja
+        double stockProducto1 = 50;
+        double stockProducto2 = 50;
+        double stockProducto3 = 50;
+        double stockProducto4 = 50;
+        String clienteIngresado = "";
+        int productoElegidoCliente = 0;
+        double cantidadElegidaCliente =0;
+        double precioProducto1 = 30;
+        double precioProducto2 = 25;
+        double precioProducto3 = 32;
+        double precioProducto4 = 20;
+        
+        //-------------------------------------
+        //Menu Inicial
+        
+        while (seguirMenu == true){
+            valido = false;
+        System.out.println("\n---MENU---"+
+                "\n1.Abrir Caja"+
+                "\n2.Ventas"+
+                "\n3.Compras"+
+                "\n4.Reportes"+
+                "\n5.Cerrar Caja"+
+                "\n6.Salir del programa"+
+                "\n----------");
+        System.out.println("Porfavor ingrese la opcion a elegir");
+        try { //Misma logica que el try de python
+        Opcion = input.nextInt();
+        }
+        catch (InputMismatchException e) //Cuando haya un error va a hacer el bloque de codigo de abajo
+        {
+        System.out.println("Error: Debe de ingresar un numero valido");
+        input.next();
+        continue; //Volver al bucle del y que no se repita eso de ingrese uno correcto
+      
+        }
+
+        switch(Opcion)
+        {
+            case 1://Abrir Caja
+                siNoValido = false;//
+                if (!cajaEstado && primeraVez)
+                {
+                while (!valido)
+                    {
+                    try 
+                    {
+                    System.out.println("Ingresar la cantidad de efectivo a agregar a la caja");
+                    cajaEfectivoI = input.nextDouble();
+
+                    if (cajaEfectivoI >= 0){//Prueba si es un numero positivo
+                    cajaEfectivoT += cajaEfectivoI;
+                    valido = true;
+                    primeraVez = false;
+                    cajaEstado = true;
+                    System.out.printf("\nSe a ingresado:Lps.%.2f",cajaEfectivoI);
+                    System.out.printf("\nEfectivo Total en caja:Lps.%.2f",cajaEfectivoT);
+                    //Cuando se usa el printf con el %.2fn se tiene que poner , y no +
+                    }
+                    else //Si es negativo entonces
+                    {
+                    System.out.println("Error:No se permiten cantidades negativas");//Mensaje de error Nums negativos
+                    }
+
+                    }//Try
+                    catch(InputMismatchException e)
+                    {
+                    System.out.println("Porfavor ingresar un numero valido");
+                    input.next();
+                    valido = false;
+
+                    }//Mismatch
+
+                    }//!Valido
+                    break;
+                
+                
+                }
+                
+                else 
+                {
+                    while (!siNoValido)
+                    {
+                    System.out.println("Desea agregar efectivo? Si/No");
+                    siNo = input.next().toLowerCase();
+
+                    switch (siNo)
+                    {
+                        case "si":
+                            while (!valido)
+                    {
+                    try 
+                    {
+                    System.out.println("Ingresar la cantidad de efectivo a agregar a la caja");
+                    cajaEfectivoI = input.nextDouble();
+
+                    if (cajaEfectivoI >= 0){//Prueba si es un numero positivo
+                    cajaEfectivoT += cajaEfectivoI;
+                    valido = true;
+                    System.out.printf("\nSe a ingresado:Lps.%.2f",cajaEfectivoI);
+                    System.out.printf("\nEfectivo Total en caja:Lps.%.2f",cajaEfectivoT);
+                    cajaEstado = true;  
+                    siNoValido = true;
+                    //Cuando se usa el printf con el %.2fn se tiene que poner , y no +
+                    break;
+                    }
+                    else //Si es negativo entonces
+                    {
+                    System.out.println("Error:No se permiten cantidades negativas");//Mensaje de error Nums negativos
+                    //input.next();
+                    }
+
+                    }//Try
+                    catch(InputMismatchException e)
+                    {
+                    System.out.println("Porfavor ingresar un numero valido");
+                    input.next();
+                    valido = false;
+
+                    }//Mismatch
+
+                    }//!Valido
+                            break;
+                        case "no":
+                            cajaEstado = true;
+                            System.out.println("\nLa Caja esta abierta");
+                            siNoValido = true;
+                            break;
+                        default:
+                            System.out.println("Escribir Si o No");
+                            break;
+                    
+                    
+                    }
+                   }
+                }
+        
+                break;
+                
+            case 2://Ventas
+                if (cajaEstado == true)
+                    {
+                        boolean facturar = false;
+                        String facturacion = "---Factura---";
+                        double subTotal = 0;
+                        double total = 0;
+                        double descuento = 0;
+                        double impuesto = 0;
+                        //precioProductox es una variable para los precios de venta
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| Codigo | Producto | Precio Venta  | Stock    |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 1      | Azucar   | Lps.30        | "+stockProducto1+" KG |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 2      | Avena    | Lps.25        | "+stockProducto2+" KG |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 3      | Trigo    | Lps.32        | "+stockProducto3+" KG |");
+                        System.out.println("+--------+----------+---------------+----------+");
+                        System.out.println("| 4      | Maiz     | Lps.20        | "+stockProducto4+" KG |");
+                        
+                        System.out.println("-------------------------------------------------------------");                       
+                        System.out.println("Tipo de clientes");
+                        System.out.println("A - Cliente tipo A: puede comprar cualquier producto (codigo 1, 2, 3 y 4).");
+                        System.out.println("B - Cliente tipo B: puede comprar solo productos con codigo 1, 2 y 3.");
+                        System.out.println("C - Cliente tipo C: puede comprar solo el producto con codigo 4.");
+                        System.out.println("-------------------------------------------------------------");
+
+                        
+                        
+                        while (!valido)
+                        {
+                            System.out.print("Ingrese el tipo de cliente (A, B o C): ");
+                            clienteIngresado = input.next();
+                            if (!clienteIngresado.equalsIgnoreCase("A") && !clienteIngresado.equalsIgnoreCase("B")&& 
+                                !clienteIngresado.equalsIgnoreCase("C") )
+                            {
+                            System.out.println("Ingrese un cliente valido");
+                            }
+                            else 
+                            {
+                            valido = true;
+                            }
+                        }
+                        
+                        productoElegidoCliente =0;
+                        boolean productoPermitido = false;
+                        boolean seguir = true;
+                        boolean numeroValido = false;
+                        
+                        while (seguir)
+                        {
+                            numeroValido = false;
+                            try 
+                            {
+                                while (!numeroValido)
+                                {
+                                System.out.println("Ingrese el codigo de producto a comprar (1-4)");
+                                productoElegidoCliente = input.nextInt();
+                                if (productoElegidoCliente < 1 || productoElegidoCliente > 4)
+                                {
+                                    System.out.println("Codigo Invalido");
+                                }
+                                else
+                                {
+                                numeroValido = true;
+                                }
+                                }
+                            }
+                            catch (InputMismatchException e)
+                            {
+                                System.out.println("Ingrese un digito valido");
+                                input.next();
+                            }
+                        switch (clienteIngresado.toLowerCase())
+                        {
+                            case "a":
+                                productoPermitido = (productoElegidoCliente == 1 ||productoElegidoCliente == 2 
+                                        ||productoElegidoCliente == 3 ||productoElegidoCliente == 4);
+                                
+                                break;
+                            case "b":
+                                productoPermitido = (productoElegidoCliente == 1 ||productoElegidoCliente == 2 
+                                        ||productoElegidoCliente == 3);
+                                
+                                
+                                break;
+                            case "c":
+                                productoPermitido = (productoElegidoCliente == 4);
+                                
+                                break;
+                            default:
+                                break;
+                        }
+                        if (!productoPermitido)
+                                {
+                                    System.out.println("Este cliente no puede comprar el producto seleccionado");
+                                    seguir = false;
+                                    continue;
+                                    
+
+                                }
+                        else if (productoPermitido)
+                        {
+                        cantidadElegidaCliente = 0;
+                        numeroValido = false;
+                        while (!numeroValido)
+                        {
+                        try 
+                        {
+                        System.out.println("Ingrese la cantidad a comprar(KG)");
+                        cantidadElegidaCliente = input.nextDouble();
+                        numeroValido = true;
+                        }
+                        catch (InputMismatchException e)
+                        {
+                            System.out.println("Ingrese un digito valido");
+                            input.next();
+                        }
+                        }//numero valido
+                        //Revisar si hay stock
+                        //---------------------------------------------------------------------
+                        //Inicio de procesos de subTotal
+                        switch (productoElegidoCliente)
+                        {
+                            case 1://En caso de elegir el producto 1
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1)
+                                {
+                                stockProducto1 -= cantidadElegidaCliente;
+                                        subTotal += (cantidadElegidaCliente * precioProducto1);
+                                        facturacion = facturacion + 
+                                                "\nCodigo: 1" + 
+                                                "   Nombre Producto: Azucar"+ 
+                                                "   Precio Unitario: "+precioProducto1+
+                                                "   Cantidad: "+cantidadElegidaCliente;
+                                }
+                                else 
+                                    {
+                                        System.out.println("No hay stock suficiente de ese producto");
+                                    }
+                                break;
+                            case 2://En caso de elegir el producto 2
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
+                                    {
+                                        stockProducto2 -= cantidadElegidaCliente;
+                                        subTotal += (cantidadElegidaCliente * precioProducto2);
+                                        facturacion = facturacion + 
+                                                "\nCodigo: 2" + 
+                                                "   Nombre Producto: Avena"+ 
+                                                "   Precio Unitario: "+precioProducto2+
+                                                "   Cantidad: "+cantidadElegidaCliente;
+                                    }
+                                    else 
+                                    {
+                                        System.out.println("No hay stock suficiente de ese producto");
+                                    }
+                                break;
+                            case 3://En caso de elegr producto 3
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
+                                    {
+                                        stockProducto3 -= cantidadElegidaCliente;
+                                        subTotal += (cantidadElegidaCliente * precioProducto3);
+                                        facturacion = facturacion + 
+                                                "\nCodigo: 3" + 
+                                                "   Nombre Producto: Trigo"+ 
+                                                "   Precio Unitario: "+precioProducto3+
+                                                "   Cantidad: "+cantidadElegidaCliente;
+                                        
+                                        
+                                    }
+                                    else 
+                                    {
+                                        System.out.println("No hay stock suficiente de ese producto");
+                                    }
+                                break;
+                            case 4://En caso de elegir producto 4
+                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
+                                    {
+                                        stockProducto4 -= cantidadElegidaCliente;
+                                        subTotal += (cantidadElegidaCliente * precioProducto4);                                        
+                                        facturacion = facturacion + 
+                                                "\nCodigo: 4" + 
+                                                "   Nombre Producto: Maiz"+ 
+                                                "   Precio Unitario: "+precioProducto4+
+                                                "   Cantidad: "+cantidadElegidaCliente;
+                                        
+                                        
+                                    }
+                                    else 
+                                    {
+                                        System.out.println("No hay stock suficiente de ese producto");
+                                    }
+                                break;
+                            default:
+                                break;
+                        
+                        
+                        }                        
+                        }//producto permmitido
+                            //---------------------------------------------------------------------
+                            //Revisar si el cliente quiere continuar comprando productos
+                            siNoValido = false;
+                            while (!siNoValido)
+                            {
+                            System.out.println("Desea continuar comprando productos? Si/No");
+                                siNo = input.next();
+                            
+                            switch (siNo.toLowerCase())
+                            {
+                                case "si":
+                                    siNoValido = true;
+                                    break;
+                                case "no":
+                                    siNoValido = true;
+                                    seguir = false;
+                                    facturar = true;
+                                    
+                                    break;
+                                default:
+                                    siNoValido = false;
+                                    System.out.println("Ingrese Si/No");
+                                    break;
+                            
+                            }
+                            }//siNoValido
+                        
+                        }//Seguir
+                    //---------------------------------------------------------------------------
+                       
+                    if (facturar)
+                    {
+                        //Calcular subtotal
+                        int cantidadDesc = 0;
+                        if (subTotal >=1000 &&  subTotal<=5000)  {
+                            descuento = subTotal * 0.05;
+                            cantidadDesc =5;
+                            
+                        }
+                        else if (subTotal>5000) {
+                        descuento = subTotal * 0.1;
+                        cantidadDesc = 10;
+                        
+                        
+                        }
+                        
+                        
+                        //-----------------FACTURACION DESPUES DE TODO-------------------------
+                        impuesto = 0.07 * subTotal;
+                        total = (subTotal - descuento)+impuesto;
+                        facturacion = facturacion + "\n-------------------"+ 
+                                "\nsubTotal:Lps."+String.format("%.2f", subTotal)+
+                                "\nImpuesto:Lps."+String.format("%.2f",impuesto)+
+                                "\nDescuento:Lps."+String.format("%.2f",descuento)+
+                                "\nPorcentaje de descuento:"+cantidadDesc+"%"+
+                                "\nTotal:Lps."+String.format("%.2f",total);
+                        
+                        System.out.println(facturacion);
+                        cajaEfectivoV+=total;
+                        cajaEfectivoT+=total;
+                    }//Facturar
+                    }//Caja estado true
+                break;
+            default://Cosas que no sean eso
+                System.out.println("Opcion Invalida");
+                break;
+                
+        }       
+        
+}
+}
+}
