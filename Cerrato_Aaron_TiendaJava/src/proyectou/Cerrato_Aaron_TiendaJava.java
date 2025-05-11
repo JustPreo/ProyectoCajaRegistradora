@@ -37,6 +37,19 @@ public class Cerrato_Aaron_TiendaJava {
         double precioProducto3 = 32;
         double precioProducto4 = 20;
         
+        //VARIABLE PARA LA CANTIDADES DE COMPRA , VENTA , CANTIDAD VENDIDA ETC.
+        double gananciaV = 0;
+        double gananciaTotalVenta=0;
+        
+        int cVendidoP1 = 0,cVendidoP2=0,cVendidoP3=0,cVendidoP4=0;
+        int cCompradoP1=0,cCompradoP2=0,cCompradoP3=0,cCompradoP4=0;
+        double totalVendido=0,totalComprado=0,totalGanancia=0;
+        double promedioVentas=0,promedioCompras=0;
+        //VARIABLES PARA MAYOR Y MENOR
+        double vMayorGanancia =0;
+        double cMayorGasto=0;
+        double cProductoEstrella=0;
+        String nProductoEstrella="";
         //-------------------------------------
         //Menu Inicial
         while (seguirMenu == true){
@@ -291,7 +304,8 @@ public class Cerrato_Aaron_TiendaJava {
                             case 1://En caso de elegir el producto 1
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1)
                                 {
-                                stockProducto1 -= cantidadElegidaCliente;
+                                    cVendidoP1+=cantidadElegidaCliente;
+                                    stockProducto1 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto1);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 1" + 
@@ -307,7 +321,8 @@ public class Cerrato_Aaron_TiendaJava {
                             case 2://En caso de elegir el producto 2
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
                                     {
-                                        stockProducto2 -= cantidadElegidaCliente;
+                                    cVendidoP2+=cantidadElegidaCliente;    
+                                    stockProducto2 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto2);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 2" + 
@@ -323,7 +338,8 @@ public class Cerrato_Aaron_TiendaJava {
                             case 3://En caso de elegr producto 3
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
                                     {
-                                        stockProducto3 -= cantidadElegidaCliente;
+                                    cVendidoP3+=cantidadElegidaCliente;    
+                                    stockProducto3 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto3);
                                         facturacion = facturacion + 
                                                 "\nCodigo: 3" + 
@@ -341,7 +357,8 @@ public class Cerrato_Aaron_TiendaJava {
                             case 4://En caso de elegir producto 4
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
                                     {
-                                        stockProducto4 -= cantidadElegidaCliente;
+                                    cVendidoP4+=cantidadElegidaCliente;    
+                                    stockProducto4 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto4);                                        
                                         facturacion = facturacion + 
                                                 "\nCodigo: 4" + 
@@ -571,21 +588,25 @@ public class Cerrato_Aaron_TiendaJava {
                                                   cajaEfectivoT -= costoTotal;
                                                   if (productoElegidoUsuario==1) 
                                                   {
+                                                      cCompradoP1+=cantidadKG;
                                                       stockProducto1 += cantidadKG;
                                                       nombreP = "Azucar";
                                                   }
                                                   else if (productoElegidoUsuario==2)
                                                   {
+                                                      cCompradoP2+=cantidadKG;
                                                       stockProducto2 += cantidadKG;
                                                       nombreP = "Avena";
                                                   }
                                                   else if (productoElegidoUsuario==3)
                                                   {
+                                                      cCompradoP3+=cantidadKG;
                                                       stockProducto3 += cantidadKG;
                                                       nombreP = "Trigo";
                                                   }
                                                   else if (productoElegidoUsuario==4)
                                                   {
+                                                      cCompradoP4+=cantidadKG;
                                                       stockProducto4 += cantidadKG;
                                                       nombreP = "Maiz";
                                                   }
