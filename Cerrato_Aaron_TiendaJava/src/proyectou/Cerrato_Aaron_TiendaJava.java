@@ -50,6 +50,8 @@ public class Cerrato_Aaron_TiendaJava {
         double cMayorGasto=0;
         double cProductoEstrella=0;
         String nProductoEstrella="";
+        //VARIABLES PARA CONTAR CUANTO SE VENDIO (VENTAS REALIZADAS Y COMPRAS)
+        int ventasDia=0,comprasDia=0;
         //-------------------------------------
         //Menu Inicial
         while (seguirMenu == true){
@@ -179,6 +181,7 @@ public class Cerrato_Aaron_TiendaJava {
                                 if (cajaEstado == true && (stockProducto1 > 0 || stockProducto2 > 0||stockProducto3 > 0||stockProducto4 > 0))
                                     //Revisar si la caja estado true  y minimo hay 1 de stock en un producto
                     {
+                        double gananciaVenta=0;
                         boolean facturar = false;
                         String facturacion = "---Factura---";
                         double subTotal = 0;
@@ -304,9 +307,11 @@ public class Cerrato_Aaron_TiendaJava {
                             case 1://En caso de elegir el producto 1
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1)
                                 {
+                                        
                                     cVendidoP1+=cantidadElegidaCliente;
                                     stockProducto1 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto1);
+                                        gananciaVenta += (subTotal-(25*cantidadElegidaCliente));
                                         facturacion = facturacion + 
                                                 "\nCodigo: 1" + 
                                                 "   Nombre Producto: Azucar"+ 
@@ -324,6 +329,7 @@ public class Cerrato_Aaron_TiendaJava {
                                     cVendidoP2+=cantidadElegidaCliente;    
                                     stockProducto2 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto2);
+                                        gananciaVenta += (subTotal-(22*cantidadElegidaCliente));//Voy a tomar el mayor precio de compra para el producto 2
                                         facturacion = facturacion + 
                                                 "\nCodigo: 2" + 
                                                 "   Nombre Producto: Avena"+ 
@@ -341,6 +347,7 @@ public class Cerrato_Aaron_TiendaJava {
                                     cVendidoP3+=cantidadElegidaCliente;    
                                     stockProducto3 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto3);
+                                        gananciaVenta += (subTotal-(30*cantidadElegidaCliente));
                                         facturacion = facturacion + 
                                                 "\nCodigo: 3" + 
                                                 "   Nombre Producto: Trigo"+ 
@@ -359,7 +366,8 @@ public class Cerrato_Aaron_TiendaJava {
                                     {
                                     cVendidoP4+=cantidadElegidaCliente;    
                                     stockProducto4 -= cantidadElegidaCliente;
-                                        subTotal += (cantidadElegidaCliente * precioProducto4);                                        
+                                        subTotal += (cantidadElegidaCliente * precioProducto4);
+                                        gananciaVenta += (subTotal-(18*cantidadElegidaCliente));
                                         facturacion = facturacion + 
                                                 "\nCodigo: 4" + 
                                                 "   Nombre Producto: Maiz"+ 
@@ -439,6 +447,7 @@ public class Cerrato_Aaron_TiendaJava {
                         System.out.println(facturacion);
                         cajaEfectivoV+=total;
                         cajaEfectivoT+=total;
+                       ventasDia ++;
                     }//Facturar
                     }//Caja estado true
                                 else if(!cajaEstado)
@@ -582,6 +591,8 @@ public class Cerrato_Aaron_TiendaJava {
                                                 }
                                               costoTotal = costoUnitario * cantidadKG;
                                               
+                                              
+                                              
                                               if (costoTotal <= cajaEfectivoT)
                                               {
                                                   String nombreP = "";
@@ -613,7 +624,10 @@ public class Cerrato_Aaron_TiendaJava {
                                               
 
                                                 //Logica de facturacion)?
-                                                
+                                                if (costoTotal > cMayorGasto)
+                                                {
+                                                cMayorGasto = costoTotal;
+                                                }
                                                 
                                                 
                                                 facturacion = facturacion + 
@@ -623,8 +637,12 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "   Cantidad: "+cantidadKG +" KG"+
                                                 "\nTotal:Lps "+String.format("%.2f",costoTotal);
                                                 System.out.println(facturacion);
+                                                comprasDia++;
                                                 break;
                                               
+                                                
+                                                
+                                                
                                               
                                               
                                               }//FinIfCostoTotal
