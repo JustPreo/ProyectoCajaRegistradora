@@ -22,7 +22,9 @@ public class Cerrato_Aaron_TiendaJava {
         int Opcion = 0; //Crear la vaiable opcion
         double cajaEfectivoT = 0;//El efectivo de la caja como tal , asi se calcula todo lo que hay
         double cajaEfectivoV = 0;//Efectivo de ventas , se usara para medir el total de dinero ese dia
+        double cajaEfectivoC = 0;//Efectivo usado en compras , se usara para medir el total costo de ese dia
         double cajaEfectivoI = 0;//Efectivo ingresado
+        double bancoEfectivo =0;
         boolean valido = false;//Numero valido en try
         boolean cajaEstado = false; //Estado de la caja
         double stockProducto1 = 0;
@@ -41,8 +43,8 @@ public class Cerrato_Aaron_TiendaJava {
         double gananciaV = 0;
         double gananciaTotalVenta=0;
         
-        int cVendidoP1 = 0,cVendidoP2=0,cVendidoP3=0,cVendidoP4=0;
-        int cCompradoP1=0,cCompradoP2=0,cCompradoP3=0,cCompradoP4=0;
+        double cVendidoP1 = 0,cVendidoP2=0,cVendidoP3=0,cVendidoP4=0;
+        double cCompradoP1=0,cCompradoP2=0,cCompradoP3=0,cCompradoP4=0;
         double totalVendido=0,totalComprado=0,totalGanancia=0;
         double promedioVentas=0,promedioCompras=0;
         //VARIABLES PARA MAYOR Y MENOR
@@ -181,6 +183,11 @@ public class Cerrato_Aaron_TiendaJava {
                                 if (cajaEstado == true && (stockProducto1 > 0 || stockProducto2 > 0||stockProducto3 > 0||stockProducto4 > 0))
                                     //Revisar si la caja estado true  y minimo hay 1 de stock en un producto
                     {
+                                    
+                        double vendidoP1=0;
+                        double vendidoP2=0;
+                        double vendidoP3=0;
+                        double vendidoP4=0;
                         double gananciaVenta=0;
                         boolean facturar = false;
                         String facturacion = "---Factura---";
@@ -308,10 +315,11 @@ public class Cerrato_Aaron_TiendaJava {
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1)
                                 {
                                         
-                                    cVendidoP1+=cantidadElegidaCliente;
+                                    vendidoP1+=cantidadElegidaCliente;
                                     stockProducto1 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto1);
                                         gananciaVenta += (subTotal-(25*cantidadElegidaCliente));
+                                        
                                         facturacion = facturacion + 
                                                 "\nCodigo: 1" + 
                                                 "   Nombre Producto: Azucar"+ 
@@ -326,7 +334,7 @@ public class Cerrato_Aaron_TiendaJava {
                             case 2://En caso de elegir el producto 2
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
                                     {
-                                    cVendidoP2+=cantidadElegidaCliente;    
+                                    vendidoP2+=cantidadElegidaCliente;    
                                     stockProducto2 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto2);
                                         gananciaVenta += (subTotal-(22*cantidadElegidaCliente));//Voy a tomar el mayor precio de compra para el producto 2
@@ -344,7 +352,7 @@ public class Cerrato_Aaron_TiendaJava {
                             case 3://En caso de elegr producto 3
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
                                     {
-                                    cVendidoP3+=cantidadElegidaCliente;    
+                                    vendidoP3+=cantidadElegidaCliente;    
                                     stockProducto3 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto3);
                                         gananciaVenta += (subTotal-(30*cantidadElegidaCliente));
@@ -364,7 +372,7 @@ public class Cerrato_Aaron_TiendaJava {
                             case 4://En caso de elegir producto 4
                                 if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
                                     {
-                                    cVendidoP4+=cantidadElegidaCliente;    
+                                    vendidoP4+=cantidadElegidaCliente;    
                                     stockProducto4 -= cantidadElegidaCliente;
                                         subTotal += (cantidadElegidaCliente * precioProducto4);
                                         gananciaVenta += (subTotal-(18*cantidadElegidaCliente));
@@ -379,6 +387,7 @@ public class Cerrato_Aaron_TiendaJava {
                                     else 
                                     {
                                         System.out.println("No hay stock suficiente de ese producto");
+                                        continue;
                                     }
                                 break;
                             default:
@@ -433,9 +442,16 @@ public class Cerrato_Aaron_TiendaJava {
                         
                         }
                         
+
+                        //PRODUCTOS VENDIDOS
+                        cVendidoP1+=vendidoP1;
+                        cVendidoP2+=vendidoP2;
+                        cVendidoP3+=vendidoP3;
+                        cVendidoP4+=vendidoP4;
                         
                         //-----------------FACTURACION DESPUES DE TODO-------------------------
                         impuesto = 0.07 * subTotal;
+                        
                         total = (subTotal - descuento)+impuesto;
                         facturacion = facturacion + "\n-------------------"+ 
                                 "\nsubTotal:Lps."+String.format("%.2f", subTotal)+
@@ -447,7 +463,16 @@ public class Cerrato_Aaron_TiendaJava {
                         System.out.println(facturacion);
                         cajaEfectivoV+=total;
                         cajaEfectivoT+=total;
-                       ventasDia ++;
+                       if (subTotal != 0)
+                       {
+                        ventasDia ++;
+                       }
+                       gananciaTotalVenta += gananciaVenta; //Determinar la mayor ganancia
+                       
+                       if (gananciaVenta>vMayorGanancia)
+                       {
+                       vMayorGanancia = gananciaVenta;
+                       }
                     }//Facturar
                     }//Caja estado true
                                 else if(!cajaEstado)
@@ -638,6 +663,12 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "\nTotal:Lps "+String.format("%.2f",costoTotal);
                                                 System.out.println(facturacion);
                                                 comprasDia++;
+                                                
+                                                if (costoTotal > cMayorGasto)
+                                                {
+                                                cMayorGasto = costoTotal;
+                                                }
+                                                
                                                 break;
                                               
                                                 
@@ -691,13 +722,139 @@ public class Cerrato_Aaron_TiendaJava {
                 
                 break;
             case 4://Facturacion
+                
+                if (cajaEstado)
+                {
+                    double promedioCompra = cajaEfectivoC / ventasDia;
+                    double promedioVenta =cajaEfectivoV / comprasDia;
+                    //REVISAR PRODUCTO ESTRELLA
+                    if (cVendidoP1 > cProductoEstrella)
+                    {
+                    cProductoEstrella = cVendidoP1;
+                    nProductoEstrella = "Maiz";
+                    }
+                    if (cVendidoP2 > cProductoEstrella)
+                    {
+                    cProductoEstrella = cVendidoP2;
+                    nProductoEstrella = "Trigo";
+                    }
+                    if (cVendidoP3 > cProductoEstrella)
+                    {
+                    cProductoEstrella = cVendidoP3;
+                    nProductoEstrella = "Azucar";
+                    }
+                    if (cVendidoP4 > cProductoEstrella)
+                    {
+                    cProductoEstrella = cVendidoP4;
+                    nProductoEstrella = "Avena";
+                    }
+                    
+                    //---------------------------------------------
                 System.out.println("Facturacion");
+                System.out.println("-----------------"+
+                                 "\n---FACTURACION---"+
+                                 "\n-----------------");
+                //CAJA
+                System.out.println("Dinero en caja -> Lps. "+cajaEfectivoT);
+                //VENTAS EN EL DIA
+                System.out.println("-----------------");
+                System.out.println("Cantidad de Maiz Vendido->"+String.format("%.2f",cVendidoP1)+" KG"
+                                   +"\nCantidad de Trigo Vendido->"+String.format("%.2f",cVendidoP2)+" KG"
+                                   +"\nCantidad de Azucar Vendido->"+String.format("%.2f",cVendidoP3)+" KG"
+                                   +"\nCantidad de Avena Vendido->"+String.format("%.2f",cVendidoP4)+" KG");
+                //COMPRAS EN EL DIA
+                System.out.println("-----------------");
+                System.out.println("Cantidad de Maiz Comprado->"+String.format("%.2f",cCompradoP1)+" KG"
+                                   +"\nCantidad de Trigo Comprado->"+String.format("%.2f",cCompradoP2)+" KG"
+                                   +"\nCantidad de Azucar Comprado->"+String.format("%.2f",cCompradoP3)+" KG"
+                                   +"\nCantidad de Avena Comprado->"+String.format("%.2f",cCompradoP4)+" KG");
+                //CANTIDAD DE COMPRAS/VENTAS DIA 
+                System.out.println("-----------------");
+                    System.out.println("Cantidad de Compras en el dia-> "+comprasDia+
+                                     "\nCantidad de Ventas en el dia-> "+ventasDia);
+                    //GANANCIAS
+                    System.out.println("\nGanancia del dia->Lps. "+String.format("%.2f",gananciaTotalVenta)+
+                                       "\nMayor Ganancia->Lps."+String.format("%.2f",vMayorGanancia));
+                    //PRODUCTO ESTRELLA (DEBATIBLE SI DEJARLO AQUI O HASTA EL FINAL)
+                    System.out.println("\nProducto Estrella-> "+nProductoEstrella+" con "+cProductoEstrella+" KG vendidos");
+                    //MAYOR GASTO
+                    System.out.println("\nMayor gasto del dia ->Lps."+String.format("%.2f",cMayorGasto));
+                    //PROMEDIOS
+                    System.out.println("Promedio de Compras->Lps."+String.format("%.2f",promedioCompras)+
+                                        "\nPromedio de ventas->Lps."+String.format("%.2f",promedioVentas));
+                    
+                //
+                
+                }
+                
+                else
+                {
+                    System.out.println("La caja ocupa estar abierta para realizar esta accion");
+                }
                 break;
             case 5://Cerrar Caja
                 System.out.println("Cerrar Caja");
+                
+                if (cajaEstado)
+                {
+                    double montoIngresado = 0;
+                    valido = false;
+                System.out.println("\nGanancia del dia->Lps."+String.format("%.2f",gananciaTotalVenta));
+                    System.out.println("Cantidad actual en la caja->Lps."+String.format("%.2f",cajaEfectivoT));
+                
+                while (!valido)    
+                {
+                    try
+                    {
+                    System.out.println("Cuanto efectivo desea ingresar al banco?(Maximo 60% de caja)");
+                    montoIngresado = input.nextDouble();
+                    
+                    if (montoIngresado <= (cajaEfectivoT *0.6)&&montoIngresado >= 0)
+                    {
+                        
+                        bancoEfectivo += montoIngresado;
+                        cajaEfectivoT -= montoIngresado;
+                        valido = true;
+                        System.out.println("El banco ahora contiene:Lps."+String.format("%.2f",bancoEfectivo));
+                    }
+                    else
+                    {
+                        System.out.println("Solo puede ingresar maximo 60% del efectivo en caja");
+                    }
+                    
+                    }
+                    catch (InputMismatchException e)
+                    {
+                        System.out.println("Ingrese un numero valido");
+                    }
+                }
+                cVendidoP1=0;
+                cVendidoP2=0;
+                cVendidoP3=0;
+                cVendidoP4=0;
+                cCompradoP1=0;
+                cCompradoP2=0;
+                cCompradoP3=0;
+                cCompradoP4=0;
+                cMayorGasto=0;
+                vMayorGanancia=0;
+                comprasDia=0;
+                ventasDia=0;
+                gananciaTotalVenta=0;
+                cProductoEstrella=0;
+                nProductoEstrella="";
+                cajaEfectivoV=0;
+                cajaEfectivoC=0;
+                
+                    
+                }//Fin caja estado
+                else
+                {
+                    System.out.println("La caja ocupa estar abierta para realizar esta accion");
+                }
                 break;
             case 6:
-                System.out.println("Salir del programa");
+                System.out.println("Saliendo del programa...");
                 break;
             default:
                 System.out.println("Elige una opcion valida");
