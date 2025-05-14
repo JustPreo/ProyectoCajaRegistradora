@@ -819,7 +819,7 @@ public class Cerrato_Aaron_TiendaJava {
                     System.out.println("Cuanto efectivo desea ingresar al banco?(Maximo 60% de caja)");
                     montoIngresado = input.nextDouble();
                     
-                    if (montoIngresado <= (cajaEfectivoT *0.6)&&montoIngresado >= 0)
+                    if (montoIngresado <= (cajaEfectivoT *0.6)&& montoIngresado >= 0)
                     {
                         
                         bancoEfectivo += montoIngresado;
