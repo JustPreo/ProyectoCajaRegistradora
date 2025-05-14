@@ -94,7 +94,7 @@ public class Cerrato_Aaron_TiendaJava {
                     System.out.println("Ingresar la cantidad de efectivo a agregar a la caja");
                     cajaEfectivoI = input.nextDouble();
 
-                    if (cajaEfectivoI >= 0){//Prueba si es un numero positivo
+                    if (cajaEfectivoI > 0){//Prueba si es un numero positivo
                     cajaEfectivoT += cajaEfectivoI;
                     valido = true;
                     primeraVez = false;
@@ -107,7 +107,7 @@ public class Cerrato_Aaron_TiendaJava {
 
                     else //Si es negativo entonces
                     {
-                    System.out.println("Error:No se permiten cantidades negativas");//Mensaje de error Nums negativos
+                    System.out.println("Error:Ingrese un numero valido");//Mensaje de error Nums negativos
                     }
 
                     }//Try
@@ -136,7 +136,7 @@ public class Cerrato_Aaron_TiendaJava {
                     System.out.println("Ingresar la cantidad de efectivo a agregar a la caja");
                     cajaEfectivoI = input.nextDouble();
 
-                    if (cajaEfectivoI >= 0){//Prueba si es un numero positivo
+                    if (cajaEfectivoI > 0){//Prueba si es un numero positivo
                     cajaEfectivoT += cajaEfectivoI;
                     valido = true;
                     System.out.printf("\nSe a ingresado:Lps.%.2f",cajaEfectivoI);
@@ -147,7 +147,7 @@ public class Cerrato_Aaron_TiendaJava {
                     }
                     else //Si es negativo entonces
                     {
-                    System.out.println("Error:No se permiten cantidades negativas");//Mensaje de error Nums negativos
+                    System.out.println("Error:Ingrese un numero valido");//Mensaje de error Nums negativos
                     //input.next();
                     }
 
@@ -426,6 +426,15 @@ public class Cerrato_Aaron_TiendaJava {
                         }//Seguir
                     //---------------------------------------------------------------------------
                        
+                        if (subTotal ==0)
+                        {
+                        
+                        facturar = false;
+                        
+                            System.out.println("No se realizo la compra!");
+                        
+                        }
+                    //---------------------------------------------------------------------------
                     if (facturar)
                     {
                         //Calcular subtotal
@@ -467,7 +476,7 @@ public class Cerrato_Aaron_TiendaJava {
                        {
                         ventasDia ++;
                        }
-                       gananciaTotalVenta += gananciaVenta; //Determinar la mayor ganancia
+                       
                        
                        if (gananciaVenta>vMayorGanancia)
                        {
@@ -493,15 +502,13 @@ public class Cerrato_Aaron_TiendaJava {
                         System.out.println("+--------+----------+---------------+----------+");
                         System.out.println("| Codigo | Producto | Precio Compra | Proveedor |");
                         System.out.println("+--------+----------+---------------+----------+");
-                        System.out.println("| 1      | Azucar   |Lps.25         | A         |");
+                        System.out.println("| 1      | Azucar   |Lps.25         | (A)       |");
                         System.out.println("+--------+----------+---------------+----------+");
-                        System.out.println("| 2      | Avena    |Lps.20         | B         |");
+                        System.out.println("| 2      | Avena    |Lps.20(B) 22(C)| (B)  (C)  |");
                         System.out.println("+--------+----------+---------------+----------+");
-                        System.out.println("| 2      | Avena    |Lps.22         | C         |");
+                        System.out.println("| 3      | Trigo    | Lps.30        | (B)       |");
                         System.out.println("+--------+----------+---------------+----------+");
-                        System.out.println("| 3      | Trigo    | Lps.30        | B         |");
-                        System.out.println("+--------+----------+---------------+----------+");
-                        System.out.println("| 4      | Maiz     | Lps.18        | A         |");
+                        System.out.println("| 4      | Maiz     | Lps.18        | (A)       |");
                         
                         String tipoProveedor = "";
                         int productoElegidoUsuario =0;
@@ -663,7 +670,7 @@ public class Cerrato_Aaron_TiendaJava {
                                                 "\nTotal:Lps "+String.format("%.2f",costoTotal);
                                                 System.out.println(facturacion);
                                                 comprasDia++;
-                                                
+                                                cajaEfectivoC +=costoTotal;
                                                 if (costoTotal > cMayorGasto)
                                                 {
                                                 cMayorGasto = costoTotal;
@@ -727,61 +734,64 @@ public class Cerrato_Aaron_TiendaJava {
                 {
                     double promedioCompra = cajaEfectivoC / ventasDia;
                     double promedioVenta =cajaEfectivoV / comprasDia;
+                    gananciaTotalVenta=cajaEfectivoV - cajaEfectivoC ;//TODO - Agregar lo de compras total
                     //REVISAR PRODUCTO ESTRELLA
-                    if (cVendidoP1 > cProductoEstrella)
+                    if (cVendidoP1 > cVendidoP2 && cVendidoP1 > cVendidoP3 && cVendidoP1 > cVendidoP4)
                     {
                     cProductoEstrella = cVendidoP1;
-                    nProductoEstrella = "Maiz";
-                    }
-                    if (cVendidoP2 > cProductoEstrella)
-                    {
-                    cProductoEstrella = cVendidoP2;
-                    nProductoEstrella = "Trigo";
-                    }
-                    if (cVendidoP3 > cProductoEstrella)
-                    {
-                    cProductoEstrella = cVendidoP3;
                     nProductoEstrella = "Azucar";
                     }
-                    if (cVendidoP4 > cProductoEstrella)
+                    if (cVendidoP2 > cVendidoP1 && cVendidoP2 > cVendidoP3 && cVendidoP2 > cVendidoP4)                    
                     {
-                    cProductoEstrella = cVendidoP4;
+                    cProductoEstrella = cVendidoP2;
                     nProductoEstrella = "Avena";
                     }
+                    if (cVendidoP3 > cVendidoP1 && cVendidoP3 > cVendidoP2 && cVendidoP3 > cVendidoP4)                    
+                    {
+                    cProductoEstrella = cVendidoP3;
+                    nProductoEstrella = "Trigo";
+                    }
+                    if (cVendidoP4 > cVendidoP1 && cVendidoP4 > cVendidoP2 && cVendidoP4 > cVendidoP3)                    
+                    {
+                    cProductoEstrella = cVendidoP4;
+                    nProductoEstrella = "Maiz";
+                    }
                     
-                    //---------------------------------------------
-                System.out.println("Facturacion");
-                System.out.println("-----------------"+
-                                 "\n---FACTURACION---"+
-                                 "\n-----------------");
+                //---------------------------------------------
+                    System.out.println("-----------------"+
+                                       "\n---FACTURACION---"+
+                                       "\n-----------------");
                 //CAJA
-                System.out.println("Dinero en caja -> Lps. "+cajaEfectivoT);
+                    System.out.println("Dinero en caja -> Lps. "+cajaEfectivoT);
                 //VENTAS EN EL DIA
-                System.out.println("-----------------");
-                System.out.println("Cantidad de Maiz Vendido->"+String.format("%.2f",cVendidoP1)+" KG"
+                    System.out.println("-----------------");
+                    System.out.println("Cantidad de Maiz Vendido->"+String.format("%.2f",cVendidoP1)+" KG"
                                    +"\nCantidad de Trigo Vendido->"+String.format("%.2f",cVendidoP2)+" KG"
                                    +"\nCantidad de Azucar Vendido->"+String.format("%.2f",cVendidoP3)+" KG"
                                    +"\nCantidad de Avena Vendido->"+String.format("%.2f",cVendidoP4)+" KG");
                 //COMPRAS EN EL DIA
-                System.out.println("-----------------");
-                System.out.println("Cantidad de Maiz Comprado->"+String.format("%.2f",cCompradoP1)+" KG"
+                    System.out.println("-----------------");
+                    System.out.println("Cantidad de Maiz Comprado->"+String.format("%.2f",cCompradoP1)+" KG"
                                    +"\nCantidad de Trigo Comprado->"+String.format("%.2f",cCompradoP2)+" KG"
                                    +"\nCantidad de Azucar Comprado->"+String.format("%.2f",cCompradoP3)+" KG"
                                    +"\nCantidad de Avena Comprado->"+String.format("%.2f",cCompradoP4)+" KG");
                 //CANTIDAD DE COMPRAS/VENTAS DIA 
-                System.out.println("-----------------");
+                    System.out.println("-----------------");
                     System.out.println("Cantidad de Compras en el dia-> "+comprasDia+
                                      "\nCantidad de Ventas en el dia-> "+ventasDia);
-                    //GANANCIAS
+                //GANANCIAS
                     System.out.println("\nGanancia del dia->Lps. "+String.format("%.2f",gananciaTotalVenta)+
-                                       "\nMayor Ganancia->Lps."+String.format("%.2f",vMayorGanancia));
-                    //PRODUCTO ESTRELLA (DEBATIBLE SI DEJARLO AQUI O HASTA EL FINAL)
-                    System.out.println("\nProducto Estrella-> "+nProductoEstrella+" con "+cProductoEstrella+" KG vendidos");
-                    //MAYOR GASTO
+                                       "\nMayor Ganancia->Lps."+String.format("%.2f",vMayorGanancia)+
+                                        "\n-----------------");
+                //PRODUCTO ESTRELLA (DEBATIBLE SI DEJARLO AQUI O HASTA EL FINAL)
+                    System.out.println("\nProducto Estrella-> "+nProductoEstrella+" con "+cProductoEstrella+" KG vendidos"
+                                        +"\n-----------------");
+                //MAYOR GASTO
                     System.out.println("\nMayor gasto del dia ->Lps."+String.format("%.2f",cMayorGasto));
-                    //PROMEDIOS
+                //PROMEDIOS
                     System.out.println("Promedio de Compras->Lps."+String.format("%.2f",promedioCompras)+
-                                        "\nPromedio de ventas->Lps."+String.format("%.2f",promedioVentas));
+                                        "\nPromedio de ventas->Lps."+String.format("%.2f",promedioVentas)+
+                                        "\n-----------------");
                     
                 //
                 
