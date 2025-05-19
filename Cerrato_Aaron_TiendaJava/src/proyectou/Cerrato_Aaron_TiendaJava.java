@@ -570,7 +570,7 @@ public class Cerrato_Aaron_TiendaJava {
                             
                                 System.out.println("Escriba el codigo del producto que comprara:");
                             productoElegidoUsuario = input.nextInt();
-                            if (productoElegidoUsuario < 1 || productoElegidoUsuario>4)
+                            if (productoElegidoUsuario < 1 || productoElegidoUsuario>4 )
                             {
                                 System.out.println("Ingrese un producto Valido");
                                 continue;
@@ -602,7 +602,10 @@ public class Cerrato_Aaron_TiendaJava {
                                 if (!productoPermitido)
                                 {
                                     System.out.println("Este proveedor no vende ese producto");
-                                }
+                                    numeroValido = false;
+                                    continue;
+                                    
+                                }   
                                 else if (productoPermitido)
                                 {
                                     double cantidadKG = 0;
@@ -853,7 +856,7 @@ public class Cerrato_Aaron_TiendaJava {
                 
                 else if (ventasDia == 0 || comprasDia ==0)
                 {
-                    System.out.println("Ocupa realiza minimo una compra/venta para realizar esta accion");
+                    System.out.println("Ocupa realizar minimo una compra/venta para realizar esta accion");
                 }
                 break;
             case 5://Cerrar Caja
@@ -872,6 +875,7 @@ public class Cerrato_Aaron_TiendaJava {
                     try
                     {
                     System.out.println("Cuanto efectivo desea ingresar al banco?(Maximo 60% de caja)");
+                    
                     montoIngresado = input.nextDouble();
                     
                     if (montoIngresado <= (cajaEfectivoT *0.6)&& montoIngresado >= 0)
@@ -929,6 +933,8 @@ public class Cerrato_Aaron_TiendaJava {
                 break;
             case 6:
                 System.out.println("Saliendo del programa...");
+                
+                seguirMenu = false;
                 break;
             default:
                 System.out.println("**********************************");
