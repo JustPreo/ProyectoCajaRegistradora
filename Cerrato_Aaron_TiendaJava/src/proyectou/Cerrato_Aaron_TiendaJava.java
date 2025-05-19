@@ -73,6 +73,7 @@ public class Cerrato_Aaron_TiendaJava {
             System.out.println("****************************************");
             System.out.println("Error: Debe de ingresar un numero valido");
             System.out.println("****************************************");
+            input.next();
         //continue; //Volver al bucle del y que no se repita eso de ingrese uno correcto
       
         }
@@ -116,6 +117,7 @@ public class Cerrato_Aaron_TiendaJava {
                         System.out.println("Porfavor ingresar un numero valido");
                         System.out.println("**********************************");
                     valido = false;
+                    input.next();
 
                     }//Mismatch
 
@@ -288,7 +290,7 @@ public class Cerrato_Aaron_TiendaJava {
                         if (!productoPermitido)
                                 {
                                     System.out.println("Este cliente no puede comprar el producto seleccionado");
-                                    seguir = false;
+                                    seguir = true;
                                     continue;
                                     
 
