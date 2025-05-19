@@ -40,12 +40,10 @@ public class Cerrato_Aaron_TiendaJava {
         double precioProducto4 = 20;
         
         //VARIABLE PARA LA CANTIDADES DE COMPRA , VENTA , CANTIDAD VENDIDA ETC.
-        double gananciaV = 0;
         double gananciaTotalVenta=0;
         
         double cVendidoP1 = 0,cVendidoP2=0,cVendidoP3=0,cVendidoP4=0;
         double cCompradoP1=0,cCompradoP2=0,cCompradoP3=0,cCompradoP4=0;
-        double totalVendido=0,totalComprado=0,totalGanancia=0;
         double promedioVentas=0,promedioCompras=0;
         //VARIABLES PARA MAYOR Y MENOR
         double vMayorGanancia =0;
@@ -58,23 +56,24 @@ public class Cerrato_Aaron_TiendaJava {
         //Menu Inicial
         while (seguirMenu == true){
             valido = false;
-        System.out.println("\n---MENU---"+
+        System.out.println("\n------MENU-----"+
                 "\n1.Abrir Caja"+
                 "\n2.Ventas"+
                 "\n3.Compras"+
                 "\n4.Reportes"+
                 "\n5.Cerrar Caja"+
                 "\n6.Salir del programa"+
-                "\n----------");
+                "\n---------------");
         System.out.println("Porfavor ingrese la opcion a elegir");
         try { //Misma logica que el try de python
         Opcion = input.nextInt();
         }
         catch (InputMismatchException e) //Cuando haya un error va a hacer el bloque de codigo de abajo
         {
-        System.out.println("Error: Debe de ingresar un numero valido");
-        input.next();
-        continue; //Volver al bucle del y que no se repita eso de ingrese uno correcto
+            System.out.println("****************************************");
+            System.out.println("Error: Debe de ingresar un numero valido");
+            System.out.println("****************************************");
+        //continue; //Volver al bucle del y que no se repita eso de ingrese uno correcto
       
         }
         switch(Opcion)
@@ -113,8 +112,9 @@ public class Cerrato_Aaron_TiendaJava {
                     }//Try
                     catch(InputMismatchException e)
                     {
-                    System.out.println("Porfavor ingresar un numero valido");
-                    input.next();
+                        System.out.println("**********************************");
+                        System.out.println("Porfavor ingresar un numero valido");
+                        System.out.println("**********************************");
                     valido = false;
 
                     }//Mismatch
@@ -154,8 +154,9 @@ public class Cerrato_Aaron_TiendaJava {
                     }//Try
                     catch(InputMismatchException e)
                     {
-                    System.out.println("Porfavor ingresar un numero valido");
-                    input.next();
+                        System.out.println("**********************************");
+                        System.out.println("     Ingrese un digito valido     ");
+                        System.out.println("**********************************");
                     valido = false;
 
                     }//Mismatch
@@ -190,7 +191,9 @@ public class Cerrato_Aaron_TiendaJava {
                         double vendidoP4=0;
                         double gananciaVenta=0;
                         boolean facturar = false;
-                        String facturacion = "---Factura---";
+                        String facturacion = "=================================="+
+                                             "\n|          FACTURA              |"+
+                                             "\n==================================";
                         double subTotal = 0;
                         double total = 0;
                         double descuento = 0;
@@ -257,7 +260,9 @@ public class Cerrato_Aaron_TiendaJava {
                             }
                             catch (InputMismatchException e)
                             {
-                                System.out.println("Ingrese un digito valido");
+                                System.out.println("**********************************");
+                                System.out.println("     Ingrese un digito valido     ");
+                                System.out.println("**********************************");
                                 input.next();
                             }
                         switch (clienteIngresado.toLowerCase())
@@ -302,7 +307,9 @@ public class Cerrato_Aaron_TiendaJava {
                         }
                         catch (InputMismatchException e)
                         {
-                            System.out.println("Ingrese un digito valido");
+                            System.out.println("**********************************");
+                            System.out.println("     Ingrese un digito valido     ");
+                            System.out.println("**********************************");
                             input.next();
                         }
                         }//numero valido
@@ -312,7 +319,12 @@ public class Cerrato_Aaron_TiendaJava {
                         switch (productoElegidoCliente)
                         {
                             case 1://En caso de elegir el producto 1
-                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto1)
+                                if (cantidadElegidaCliente == 0) {
+                                    System.out.println("Cantidad cero - Producto no agregado");
+                                    break;
+                                }                                
+                                
+                                if (cantidadElegidaCliente > 0 && cantidadElegidaCliente <= stockProducto1)
                                 {
                                         
                                     vendidoP1+=cantidadElegidaCliente;
@@ -332,7 +344,11 @@ public class Cerrato_Aaron_TiendaJava {
                                     }
                                 break;
                             case 2://En caso de elegir el producto 2
-                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
+                                if (cantidadElegidaCliente == 0) {
+                                    System.out.println("Cantidad cero - Producto no agregado");
+                                    break;
+                                }
+                                if (cantidadElegidaCliente > 0 && cantidadElegidaCliente <= stockProducto2 ) //Comparar cada uno de los que pueda elegir)?
                                     {
                                     vendidoP2+=cantidadElegidaCliente;    
                                     stockProducto2 -= cantidadElegidaCliente;
@@ -350,7 +366,11 @@ public class Cerrato_Aaron_TiendaJava {
                                     }
                                 break;
                             case 3://En caso de elegr producto 3
-                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
+                                if (cantidadElegidaCliente == 0) {
+                                    System.out.println("Cantidad cero - Producto no agregado");
+                                    break;
+                                }
+                                if (cantidadElegidaCliente > 0 && cantidadElegidaCliente <= stockProducto3 ) //Comparar cada uno de los que pueda elegir)?
                                     {
                                     vendidoP3+=cantidadElegidaCliente;    
                                     stockProducto3 -= cantidadElegidaCliente;
@@ -370,7 +390,11 @@ public class Cerrato_Aaron_TiendaJava {
                                     }
                                 break;
                             case 4://En caso de elegir producto 4
-                                if (cantidadElegidaCliente >= 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
+                                if (cantidadElegidaCliente == 0) {
+                                    System.out.println("Cantidad cero - Producto no agregado");
+                                    break;
+                                }
+                                if (cantidadElegidaCliente > 0 && cantidadElegidaCliente <= stockProducto4 ) //Comparar cada uno de los que pueda elegir)?
                                     {
                                     vendidoP4+=cantidadElegidaCliente;    
                                     stockProducto4 -= cantidadElegidaCliente;
@@ -462,12 +486,11 @@ public class Cerrato_Aaron_TiendaJava {
                         impuesto = 0.07 * subTotal;
                         
                         total = (subTotal - descuento)+impuesto;
-                        facturacion = facturacion + "\n-------------------"+ 
+                        facturacion = facturacion +  
                                 "\nsubTotal:Lps."+String.format("%.2f", subTotal)+
-                                "\nImpuesto:Lps."+String.format("%.2f",impuesto)+
-                                "\nDescuento:Lps."+String.format("%.2f",descuento)+
-                                "\nPorcentaje de descuento:"+cantidadDesc+"%"+
-                                "\nTotal:Lps."+String.format("%.2f",total);
+                                "\nImpuesto(7%):Lps."+String.format("%.2f",impuesto)+
+                                "\nDescuento("+cantidadDesc+"%):Lps."+String.format("%.2f",descuento)+
+                                "\nTotal:Lps."+String.format("%.2f",total)+ "\n==================================";
                         
                         System.out.println(facturacion);
                         cajaEfectivoV+=total;
@@ -535,14 +558,21 @@ public class Cerrato_Aaron_TiendaJava {
                         }
                         //----------------------------------------------------------------------------
                         valido = false;
-                        String facturacion = "---Factura---";
+                        String facturacion = "=================================="+
+                                             "\n|          FACTURA              |"+
+                                             "\n==================================";
                         boolean numeroValido = false;
                         
                         while (numeroValido==false){
                             try{
-                            while (numeroValido == false){
+                            
                                 System.out.println("Escriba el codigo del producto que comprara:");
                             productoElegidoUsuario = input.nextInt();
+                            if (productoElegidoUsuario < 1 || productoElegidoUsuario>4)
+                            {
+                                System.out.println("Ingrese un producto Valido");
+                                continue;
+                            }
                             switch (tipoProveedor.toUpperCase())
                                 {
                                     case "A":
@@ -565,13 +595,11 @@ public class Cerrato_Aaron_TiendaJava {
                                     default:
                                         System.out.println("Proveedor no valido");
                                     }
-                            }
+                            
 
                                 if (!productoPermitido)
                                 {
                                     System.out.println("Este proveedor no vende ese producto");
-                                    
-
                                 }
                                 else if (productoPermitido)
                                 {
@@ -586,6 +614,7 @@ public class Cerrato_Aaron_TiendaJava {
                                             if (cantidadKG < 0)
                                             {
                                                 System.out.println("No puedes usar numeros negativos");
+                                                continue;//Para reiniciar el while
                                             }
                                             else if (cantidadKG >= 0)
                                             {
@@ -661,21 +690,29 @@ public class Cerrato_Aaron_TiendaJava {
                                                 cMayorGasto = costoTotal;
                                                 }
                                                 
-                                                
-                                                facturacion = facturacion + 
+                                                if (costoTotal >0)
+                                                {
+                                                facturacion = facturacion +
                                                 "\nCodigo: " +productoElegidoUsuario+ 
                                                 "   Nombre Producto: "+ nombreP + 
                                                 "   Precio Unitario: "+ costoUnitario +
                                                 "   Cantidad: "+cantidadKG +" KG"+
-                                                "\nTotal:Lps "+String.format("%.2f",costoTotal);
+                                                "\nTotal:Lps "+String.format("%.2f",costoTotal) +
+                                                "\n==================================";
                                                 System.out.println(facturacion);
                                                 comprasDia++;
                                                 cajaEfectivoC +=costoTotal;
+                                                
                                                 if (costoTotal > cMayorGasto)
                                                 {
                                                 cMayorGasto = costoTotal;
                                                 }
+                                                }
                                                 
+                                                else if (costoTotal ==0)
+                                                {
+                                                    System.out.println("No se genero factura!");
+                                                }
                                                 break;
                                               
                                                 
@@ -700,6 +737,7 @@ public class Cerrato_Aaron_TiendaJava {
                                         catch(InputMismatchException e)
                                         {
                                             System.out.println("Ingrese una cantidad valida");
+                                            break;
                                         }
                                     }
                                 }
@@ -708,8 +746,10 @@ public class Cerrato_Aaron_TiendaJava {
                             
                             catch (InputMismatchException e)
                             {
-                                System.out.println("Ingrese un numero valido");
-                                input.next();
+                                System.out.println("**********************************");
+                                System.out.println("     Ingrese un numero valido     ");
+                                System.out.println("**********************************");
+                                break;
                             }
                        
                         }//fin valido false para producto elegido usuario 
@@ -730,11 +770,11 @@ public class Cerrato_Aaron_TiendaJava {
                 break;
             case 4://Facturacion
                 
-                if (cajaEstado)
+                if (cajaEstado && (ventasDia > 0 || comprasDia > 0)) //verifica que este abierto y se haya realizado alguna accion en el dia
                 {
-                    double promedioCompra = cajaEfectivoC / ventasDia;
-                    double promedioVenta =cajaEfectivoV / comprasDia;
-                    gananciaTotalVenta=cajaEfectivoV - cajaEfectivoC ;//TODO - Agregar lo de compras total
+                    double promedioCompra = (comprasDia>0)?(cajaEfectivoC / comprasDia):0;
+                    double promedioVenta =(ventasDia>0)?(cajaEfectivoV / ventasDia):0;
+                    gananciaTotalVenta=cajaEfectivoV - cajaEfectivoC ;
                     //REVISAR PRODUCTO ESTRELLA
                     if (cVendidoP1 > cVendidoP2 && cVendidoP1 > cVendidoP3 && cVendidoP1 > cVendidoP4)
                     {
@@ -758,59 +798,72 @@ public class Cerrato_Aaron_TiendaJava {
                     }
                     
                 //---------------------------------------------
-                    System.out.println("-----------------"+
-                                       "\n---FACTURACION---"+
-                                       "\n-----------------");
+                    System.out.println("----------------------------------"+
+                                       "\n----------- FACTURACION ----------"+
+                                       "\n----------------------------------");
                 //CAJA
                     System.out.println("Dinero en caja -> Lps. "+cajaEfectivoT);
                 //VENTAS EN EL DIA
-                    System.out.println("-----------------");
-                    System.out.println("Cantidad de Maiz Vendido->"+String.format("%.2f",cVendidoP1)+" KG"
-                                   +"\nCantidad de Trigo Vendido->"+String.format("%.2f",cVendidoP2)+" KG"
-                                   +"\nCantidad de Azucar Vendido->"+String.format("%.2f",cVendidoP3)+" KG"
-                                   +"\nCantidad de Avena Vendido->"+String.format("%.2f",cVendidoP4)+" KG");
+                                    System.out.println("----------------------------------");
+                    System.out.println("Cantidad de Azucar Vendido->"+String.format("%.2f",cVendidoP1)+" KG"
+                                   +"\nCantidad de Avena Vendido->"+String.format("%.2f",cVendidoP2)+" KG"
+                                   +"\nCantidad de Trigo Vendido->"+String.format("%.2f",cVendidoP3)+" KG"
+                                   +"\nCantidad de Maiz Vendido->"+String.format("%.2f",cVendidoP4)+" KG");
                 //COMPRAS EN EL DIA
-                    System.out.println("-----------------");
-                    System.out.println("Cantidad de Maiz Comprado->"+String.format("%.2f",cCompradoP1)+" KG"
-                                   +"\nCantidad de Trigo Comprado->"+String.format("%.2f",cCompradoP2)+" KG"
-                                   +"\nCantidad de Azucar Comprado->"+String.format("%.2f",cCompradoP3)+" KG"
-                                   +"\nCantidad de Avena Comprado->"+String.format("%.2f",cCompradoP4)+" KG");
+                                    System.out.println("----------------------------------");
+                    System.out.println("Cantidad de Azucar Comprado->"+String.format("%.2f",cCompradoP1)+" KG"
+                                   +"\nCantidad de Avena Comprado->"+String.format("%.2f",cCompradoP2)+" KG"
+                                   +"\nCantidad de Trigo Comprado->"+String.format("%.2f",cCompradoP3)+" KG"
+                                   +"\nCantidad de Maiz Comprado->"+String.format("%.2f",cCompradoP4)+" KG");
                 //CANTIDAD DE COMPRAS/VENTAS DIA 
-                    System.out.println("-----------------");
+                                    System.out.println("----------------------------------");
                     System.out.println("Cantidad de Compras en el dia-> "+comprasDia+
                                      "\nCantidad de Ventas en el dia-> "+ventasDia);
+                    
+                //VOLUMEN DE VENTAS Y COMPRAS
+                                    System.out.println("----------------------------------");
+                    System.out.println("Volumen de Compras en el dia->Lps. "+cajaEfectivoC+
+                                     "\nVolumen de Ventas en el dia->Lps. "+cajaEfectivoV);
                 //GANANCIAS
+                                    System.out.println("----------------------------------");    
                     System.out.println("\nGanancia del dia->Lps. "+String.format("%.2f",gananciaTotalVenta)+
                                        "\nMayor Ganancia->Lps."+String.format("%.2f",vMayorGanancia)+
-                                        "\n-----------------");
+                                        "\n----------------------------------");
                 //PRODUCTO ESTRELLA (DEBATIBLE SI DEJARLO AQUI O HASTA EL FINAL)
-                    System.out.println("\nProducto Estrella-> "+nProductoEstrella+" con "+cProductoEstrella+" KG vendidos"
-                                        +"\n-----------------");
+                    String vendidos = (cProductoEstrella>1)? "vendidos":"vendido";
+                    System.out.println("\nProducto Estrella-> "+nProductoEstrella+" con "+cProductoEstrella+" KG "+vendidos
+                                        +"\n----------------------------------");
                 //MAYOR GASTO
                     System.out.println("\nMayor gasto del dia ->Lps."+String.format("%.2f",cMayorGasto));
                 //PROMEDIOS
-                    System.out.println("Promedio de Compras->Lps."+String.format("%.2f",promedioCompras)+
-                                        "\nPromedio de ventas->Lps."+String.format("%.2f",promedioVentas)+
-                                        "\n-----------------");
+                    System.out.println("Promedio de Compras->Lps."+String.format("%.2f",promedioCompra)+
+                                        "\nPromedio de ventas->Lps."+String.format("%.2f",promedioVenta)+
+                                        "\n----------------------------------");
                     
                 //
                 
                 }
                 
-                else
+                else if (!cajaEstado)
                 {
                     System.out.println("La caja ocupa estar abierta para realizar esta accion");
                 }
+                
+                else if (ventasDia == 0 || comprasDia ==0)
+                {
+                    System.out.println("Ocupa realiza minimo una compra/venta para realizar esta accion");
+                }
                 break;
             case 5://Cerrar Caja
-                System.out.println("Cerrar Caja");
                 
                 if (cajaEstado)
                 {
                     double montoIngresado = 0;
                     valido = false;
-                System.out.println("\nGanancia del dia->Lps."+String.format("%.2f",gananciaTotalVenta));
-                    System.out.println("Cantidad actual en la caja->Lps."+String.format("%.2f",cajaEfectivoT));
+                System.out.println("\n=================================="+
+                        "\nGanancia del dia->Lps."+String.format("%.2f",gananciaTotalVenta));
+                    System.out.println("Cantidad actual en la caja->Lps."
+                            +String.format("%.2f",cajaEfectivoT)+"\n==================================");
                 
                 while (!valido)    
                 {
@@ -825,7 +878,9 @@ public class Cerrato_Aaron_TiendaJava {
                         bancoEfectivo += montoIngresado;
                         cajaEfectivoT -= montoIngresado;
                         valido = true;
+                        System.out.println("\n==================================");
                         System.out.println("El banco ahora contiene:Lps."+String.format("%.2f",bancoEfectivo));
+                        System.out.println("\n==================================");
                     }
                     else
                     {
@@ -835,7 +890,9 @@ public class Cerrato_Aaron_TiendaJava {
                     }
                     catch (InputMismatchException e)
                     {
-                        System.out.println("Ingrese un numero valido");
+                        System.out.println("**********************************");
+                        System.out.println("     Ingrese un numero valido     ");
+                        System.out.println("**********************************");
                     }
                 }
                 cVendidoP1=0;
@@ -858,6 +915,11 @@ public class Cerrato_Aaron_TiendaJava {
                 
                     
                 }//Fin caja estado
+                else if (cajaEstado && (ventasDia < 0 && comprasDia < 0))
+                {
+                    System.out.println("Ocupas realizar una compra o venta para usar esta opcion!");
+                }
+                
                 else
                 {
                     System.out.println("La caja ocupa estar abierta para realizar esta accion");
@@ -867,7 +929,10 @@ public class Cerrato_Aaron_TiendaJava {
                 System.out.println("Saliendo del programa...");
                 break;
             default:
-                System.out.println("Elige una opcion valida");
+                System.out.println("**********************************");
+                System.out.println("*         OPCION NO VALIDA       *");
+                System.out.println("*         INTENTE DE NUEVO       *");
+                System.out.println("**********************************");
                 break;
         
         }//Switch
