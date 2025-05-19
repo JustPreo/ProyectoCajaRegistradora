@@ -107,13 +107,13 @@ public class Cerrato_Aaron_TiendaJava {
 
                     else //Si es negativo entonces
                     {
-                    System.out.println("Error:Ingrese un numero valido");//Mensaje de error Nums negativos
+                    System.out.println("\nError:Ingrese un numero valido");//Mensaje de error Nums negativos
                     }
 
                     }//Try
                     catch(InputMismatchException e)
                     {
-                        System.out.println("**********************************");
+                        System.out.println("\n**********************************");
                         System.out.println("Porfavor ingresar un numero valido");
                         System.out.println("**********************************");
                     valido = false;
@@ -126,7 +126,7 @@ public class Cerrato_Aaron_TiendaJava {
                     }//PrimeraVez
                 else {
                     while (!siNoValido){    
-                    System.out.println("Desea ingresar efectivo a la caja? Si/No");
+                    System.out.println("\nDesea ingresar efectivo a la caja? Si/No");
                     siNo = input.next();
 
                 if (siNo.equalsIgnoreCase("si")) 
@@ -135,7 +135,7 @@ public class Cerrato_Aaron_TiendaJava {
                     {
                     try 
                     {
-                    System.out.println("Ingresar la cantidad de efectivo a agregar a la caja");
+                    System.out.println("\nIngresar la cantidad de efectivo a agregar a la caja");
                     cajaEfectivoI = input.nextDouble();
 
                     if (cajaEfectivoI > 0){//Prueba si es un numero positivo
@@ -149,7 +149,7 @@ public class Cerrato_Aaron_TiendaJava {
                     }
                     else //Si es negativo entonces
                     {
-                    System.out.println("Error:Ingrese un numero valido");//Mensaje de error Nums negativos
+                    System.out.println("\nError:Ingrese un numero valido");//Mensaje de error Nums negativos
                     //input.next();
                     }
 
@@ -413,7 +413,7 @@ public class Cerrato_Aaron_TiendaJava {
                                     else 
                                     {
                                         System.out.println("No hay stock suficiente de ese producto");
-                                        continue;
+                                        //continue;
                                     }
                                 break;
                             default:
@@ -728,7 +728,7 @@ public class Cerrato_Aaron_TiendaJava {
                                               }//FinIfCostoTotal
                                               else 
                                               {
-                                                  System.out.println("Fondos Insuficientes");
+                                                  System.out.println("\nNo se puede pagar compra!\n");
                                                   break;
                                               }
                                             
