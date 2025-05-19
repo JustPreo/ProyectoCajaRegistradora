@@ -918,6 +918,7 @@ public class Cerrato_Aaron_TiendaJava {
                 nProductoEstrella="";
                 cajaEfectivoV=0;
                 cajaEfectivoC=0;
+                cajaEstado = false;
                 
                     
                 }//Fin caja estado
